@@ -1,5 +1,5 @@
-DROP DATABASE IF EXISTS finance_tracker;
-CREATE DATABASE finance_tracker CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- DROP DATABASE IF EXISTS finance_tracker;
+CREATE DATABASE IF NOT EXISTS finance_tracker CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE finance_tracker;
 
 -- =========================

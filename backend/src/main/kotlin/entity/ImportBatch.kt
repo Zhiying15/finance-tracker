@@ -14,7 +14,7 @@ import java.util.UUID
 class ImportBatch(
 
     @Id
-    var id: UUID = UUID.randomUUID(),
+    var id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

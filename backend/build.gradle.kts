@@ -22,6 +22,7 @@ java {
 
 repositories {
     mavenCentral()
+    maven(url = "https://repo.spring.io/milestone")
 }
 
 // FIX 1: Updated to match Spring Boot 3.5.0 requirement
@@ -35,6 +36,7 @@ dependencies {
     // JPA + MySQL
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.mysql:mysql-connector-j")
+    implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.3")
 
     // Security
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -44,11 +46,17 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // DB migrations
+    // Keep your current flyway-core dependency if it's explicitly there
     implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-mysql")
+    runtimeOnly("com.mysql:mysql-connector-j")
 
     // HTTP client (Optimized OpenFeign over OkHttp wrapper)
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("io.github.openfeign:feign-okhttp")
+
+    // Ollama (AI) integration
+    implementation("org.springframework.ai:spring-ai-ollama-spring-boot-starter:1.0.0-M1")
 
     // PDF parsing
     implementation("org.apache.pdfbox:pdfbox:2.0.30")

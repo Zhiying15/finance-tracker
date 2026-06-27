@@ -20,7 +20,7 @@ import java.util.UUID
 class Budget(
 
     @Id
-    var id: UUID = UUID.randomUUID(),
+    var id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

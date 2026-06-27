@@ -19,7 +19,7 @@ import java.util.UUID
 class Transaction(
 
     @Id
-    var id: UUID = UUID.randomUUID(),
+    var id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -61,7 +61,6 @@ class Transaction(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_code")
-    @Column(nullable = false)
     var currency: Currency,
 
     @Column(nullable = false)

@@ -6,7 +6,7 @@ import com.finance.entity.ImportTransaction
 import com.finance.entity.User
 import com.finance.repository.ImportBatchRepository
 import com.finance.repository.ImportTransactionRepository
-import com.finance.service.AiParserService
+import com.finance.service.AIParserService
 import com.finance.service.ImportService
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.text.PDFTextStripper
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 
+@Service
 class ImportServiceImpl: ImportService {
 
     companion object {
@@ -27,7 +28,7 @@ class ImportServiceImpl: ImportService {
     @Autowired
     private lateinit var importTxRepo: ImportTransactionRepository
     @Autowired
-    private lateinit var aiService: AiParserService
+    private lateinit var aiService: AIParserService
     val mapper = ObjectMapper()
 
     override fun upload(fileName: String, rawText: String, user: User): ImportBatch {

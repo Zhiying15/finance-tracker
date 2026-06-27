@@ -11,7 +11,7 @@ import java.util.UUID
 class User(
 
     @Id
-    var id: UUID = UUID.randomUUID(),
+    var id: String = UUID.randomUUID().toString(),
 
     @Column(nullable = false, unique = true)
     var email: String,

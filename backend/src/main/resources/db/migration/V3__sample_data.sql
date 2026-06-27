@@ -1,0 +1,2 @@
+USE finance_tracker;
+
