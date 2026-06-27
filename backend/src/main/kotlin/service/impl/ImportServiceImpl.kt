@@ -1,5 +1,6 @@
 package com.finance.service.impl
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.finance.entity.ImportBatch
 import com.finance.entity.ImportTransaction
 import com.finance.entity.User
@@ -28,6 +29,7 @@ class ImportServiceImpl: ImportService {
     private lateinit var importTxRepo: ImportTransactionRepository
     @Autowired
     private lateinit var aiService: AiParserService
+    val mapper = ObjectMapper()
 
     override fun upload(fileName: String, rawText: String, user: User): ImportBatch {
 
@@ -45,7 +47,7 @@ class ImportServiceImpl: ImportService {
             importTxRepo.save(
                 ImportTransaction(
                     batch = batch,
-                    jsonData = it,
+                    jsonData = mapper.readTree(it),
                     approved = false
                 )
             )

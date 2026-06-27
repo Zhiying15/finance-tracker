@@ -6,22 +6,31 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import java.time.LocalDateTime
+import jakarta.persistence.UniqueConstraint
+import java.math.BigDecimal
 import java.util.UUID
 
 @Entity
-@Table(name = "import_batches")
-class ImportBatch(
+@Table(
+    name = "budgets",
+    uniqueConstraints = [
+        UniqueConstraint(columnNames = ["user_id", "year", "month"])
+    ]
+)
+class Budget(
 
     @Id
     var id: UUID = UUID.randomUUID(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User? = null,
+    var user: User,
 
-    var filename: String? = null,
-    var status: String? = null,
+    var year: Int,
+    var month: Int,
 
-    var uploadedAt: LocalDateTime = LocalDateTime.now()
+    var needPercent: BigDecimal,
+    var wantPercent: BigDecimal,
+    var savingsPercent: BigDecimal
+
 ) : BaseEntity()

@@ -1,17 +1,17 @@
 package com.finance.entity
 
-import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import java.math.BigDecimal
 import java.util.UUID
 
 @Entity
-@Table(name = "accounts")
-class Account(
+@Table(name = "recurring_transactions")
+class RecurringTransaction(
 
     @Id
     var id: UUID = UUID.randomUUID(),
@@ -21,17 +21,14 @@ class Account(
     var user: User,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_type_id")
-    var accountType: AccountType,
-
-    var name: String,
-
-    var institution: String? = null,
+    @JoinColumn(name = "merchant_id")
+    var merchant: Merchant? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "currency_code")
-    var currency: Currency? = null,
+    @JoinColumn(name = "category_id")
+    var category: Category? = null,
 
-    var isActive: Boolean = true
+    var amount: BigDecimal? = null,
+    var frequency: String? = null
 
 ) : BaseEntity()

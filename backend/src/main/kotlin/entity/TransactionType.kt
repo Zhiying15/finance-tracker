@@ -1,20 +1,24 @@
 package com.finance.entity
 
-import jakarta.persistence.Column
+import com.finance.constants.TransactionFlow
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "account_types")
-class AccountType(
+@Table(name = "transaction_types")
+class TransactionType(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0,
 
-    @Column(unique = true, nullable = false)
-    var name: String
+    var name: String,
+
+    @Enumerated(EnumType.STRING)
+    var flow: TransactionFlow
 )

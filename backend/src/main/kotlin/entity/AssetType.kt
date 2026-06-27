@@ -8,13 +8,13 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "account_types")
-class AccountType(
+@Table(name = "asset_types")
+class AssetType(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0,
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     var name: String
 )

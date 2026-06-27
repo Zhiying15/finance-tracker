@@ -1,5 +1,6 @@
 package com.finance.service.impl
 
+import com.finance.constants.TransactionStatus
 import com.finance.entity.Transaction
 import com.finance.repository.TransactionsRepository
 import com.finance.service.TransactionsService
@@ -30,7 +31,7 @@ class TransactionsServiceImpl : TransactionsService{
         val tx = transactionRepo.findById(id)
         if (tx != null) {
             // ❌ Code to execute if the value EXISTS goes here
-            tx.status = "APPROVED"
+            tx.status = TransactionStatus.APPROVED
             transactionRepo.save(tx)
         } else {
             // ❓ Code to execute if the value IS MISSING goes here

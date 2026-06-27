@@ -10,7 +10,9 @@ CREATE TABLE users (
                        email VARCHAR(255) NOT NULL UNIQUE,
                        password_hash VARCHAR(255) NOT NULL,
                        full_name VARCHAR(100),
-                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- =========================
@@ -37,15 +39,21 @@ CREATE TABLE accounts (
                           id CHAR(36) PRIMARY KEY,
                           user_id CHAR(36) NOT NULL,
                           account_type_id INT NOT NULL,
+
                           name VARCHAR(100) NOT NULL,
                           institution VARCHAR(100),
                           currency_code VARCHAR(3),
-                          is_active BOOLEAN DEFAULT TRUE,
-                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-                          FOREIGN KEY (user_id) REFERENCES users(id),
+                          is_active BOOLEAN DEFAULT TRUE,
+
+                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+                          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
                           FOREIGN KEY (account_type_id) REFERENCES account_types(id),
-                          FOREIGN KEY (currency_code) REFERENCES currencies(code)
+                          FOREIGN KEY (currency_code) REFERENCES currencies(code),
+
+                          INDEX idx_accounts_user (user_id)
 );
 
 -- =========================
@@ -53,8 +61,8 @@ CREATE TABLE accounts (
 -- =========================
 CREATE TABLE transaction_types (
                                    id INT AUTO_INCREMENT PRIMARY KEY,
-                                   name VARCHAR(50) NOT NULL,
-                                   flow VARCHAR(20) NOT NULL
+                                   name VARCHAR(50) NOT NULL UNIQUE,
+                                   flow ENUM('INCOME','EXPENSE','TRANSFER') NOT NULL
 );
 
 -- =========================
@@ -66,8 +74,10 @@ CREATE TABLE categories (
                             parent_id INT,
                             name VARCHAR(100) NOT NULL,
 
-                            FOREIGN KEY (user_id) REFERENCES users(id),
-                            FOREIGN KEY (parent_id) REFERENCES categories(id)
+                            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                            FOREIGN KEY (parent_id) REFERENCES categories(id) ON DELETE SET NULL,
+
+                            INDEX idx_categories_user (user_id)
 );
 
 -- =========================
@@ -76,12 +86,17 @@ CREATE TABLE categories (
 CREATE TABLE merchants (
                            id INT AUTO_INCREMENT PRIMARY KEY,
                            user_id CHAR(36),
+
                            merchant_name VARCHAR(200),
                            normalized_name VARCHAR(200),
+
                            default_category_id INT,
 
-                           FOREIGN KEY (user_id) REFERENCES users(id),
-                           FOREIGN KEY (default_category_id) REFERENCES categories(id)
+                           FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                           FOREIGN KEY (default_category_id) REFERENCES categories(id) ON DELETE SET NULL,
+
+                           UNIQUE KEY uq_user_merchant (user_id, merchant_name),
+                           INDEX idx_merchants_user (user_id)
 );
 
 -- =========================
@@ -90,11 +105,15 @@ CREATE TABLE merchants (
 CREATE TABLE import_batches (
                                 id CHAR(36) PRIMARY KEY,
                                 user_id CHAR(36),
+
                                 filename VARCHAR(255),
                                 status VARCHAR(50),
+
                                 uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-                                FOREIGN KEY (user_id) REFERENCES users(id)
+                                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+
+                                INDEX idx_import_batches_user (user_id)
 );
 
 -- =========================
@@ -102,7 +121,7 @@ CREATE TABLE import_batches (
 -- =========================
 CREATE TABLE transactions (
                               id CHAR(36) PRIMARY KEY,
-                              user_id CHAR(36),
+                              user_id CHAR(36) NOT NULL,
 
                               from_account_id CHAR(36),
                               to_account_id CHAR(36),
@@ -110,42 +129,46 @@ CREATE TABLE transactions (
                               transaction_type_id INT,
                               category_id INT,
                               merchant_id INT,
-
                               import_batch_id CHAR(36),
 
                               transaction_date DATE,
                               description TEXT,
 
-                              amount DECIMAL(18,2),
+                              amount DECIMAL(18,2) NOT NULL,
                               currency_code VARCHAR(3),
 
                               is_manual BOOLEAN DEFAULT FALSE,
                               is_recurring BOOLEAN DEFAULT FALSE,
 
-                              status VARCHAR(20) DEFAULT 'DRAFT',
+                              status ENUM('DRAFT','POSTED','VOID') DEFAULT 'DRAFT',
 
                               created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                              updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-                              FOREIGN KEY (user_id) REFERENCES users(id),
+                              FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
                               FOREIGN KEY (from_account_id) REFERENCES accounts(id),
                               FOREIGN KEY (to_account_id) REFERENCES accounts(id),
                               FOREIGN KEY (transaction_type_id) REFERENCES transaction_types(id),
                               FOREIGN KEY (category_id) REFERENCES categories(id),
                               FOREIGN KEY (merchant_id) REFERENCES merchants(id),
                               FOREIGN KEY (import_batch_id) REFERENCES import_batches(id),
-                              FOREIGN KEY (currency_code) REFERENCES currencies(code)
+                              FOREIGN KEY (currency_code) REFERENCES currencies(code),
+
+                              INDEX idx_tx_user_date (user_id, transaction_date),
+                              INDEX idx_tx_account (from_account_id, to_account_id)
 );
 
 -- =========================
--- IMPORT TRANSACTIONS (DRAFT)
+-- IMPORT TRANSACTIONS
 -- =========================
 CREATE TABLE import_transactions (
                                      id CHAR(36) PRIMARY KEY,
                                      batch_id CHAR(36),
+
                                      json_data JSON,
                                      approved BOOLEAN DEFAULT FALSE,
 
-                                     FOREIGN KEY (batch_id) REFERENCES import_batches(id)
+                                     FOREIGN KEY (batch_id) REFERENCES import_batches(id) ON DELETE CASCADE
 );
 
 -- =========================
@@ -154,6 +177,7 @@ CREATE TABLE import_transactions (
 CREATE TABLE budgets (
                          id CHAR(36) PRIMARY KEY,
                          user_id CHAR(36),
+
                          year INT,
                          month INT,
 
@@ -161,7 +185,12 @@ CREATE TABLE budgets (
                          want_percent DECIMAL(5,2),
                          savings_percent DECIMAL(5,2),
 
-                         FOREIGN KEY (user_id) REFERENCES users(id)
+                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+                         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+
+                         UNIQUE KEY uq_budget_user_month (user_id, year, month)
 );
 
 -- =========================
@@ -169,7 +198,7 @@ CREATE TABLE budgets (
 -- =========================
 CREATE TABLE asset_types (
                              id INT AUTO_INCREMENT PRIMARY KEY,
-                             name VARCHAR(50) NOT NULL
+                             name VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- =========================
@@ -178,16 +207,21 @@ CREATE TABLE asset_types (
 CREATE TABLE assets (
                         id CHAR(36) PRIMARY KEY,
                         user_id CHAR(36),
+
                         asset_type_id INT,
                         account_id CHAR(36),
 
                         name VARCHAR(100),
                         provider VARCHAR(100),
+
                         current_value DECIMAL(18,2),
 
                         metadata JSON,
 
-                        FOREIGN KEY (user_id) REFERENCES users(id),
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+                        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
                         FOREIGN KEY (asset_type_id) REFERENCES asset_types(id),
                         FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
@@ -198,28 +232,36 @@ CREATE TABLE assets (
 CREATE TABLE rules (
                        id CHAR(36) PRIMARY KEY,
                        user_id CHAR(36),
+
+                       rule_type ENUM('TEXT','REGEX','MERCHANT') DEFAULT 'TEXT',
                        contains_text VARCHAR(100),
+
                        merchant_id INT,
                        category_id INT,
 
-                       FOREIGN KEY (user_id) REFERENCES users(id),
+                       priority INT DEFAULT 100,
+
+                       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
                        FOREIGN KEY (merchant_id) REFERENCES merchants(id),
-                       FOREIGN KEY (category_id) REFERENCES categories(id)
+                       FOREIGN KEY (category_id) REFERENCES categories(id),
+
+                       INDEX idx_rules_user (user_id)
 );
 
 -- =========================
--- RECURRING
+-- RECURRING TRANSACTIONS
 -- =========================
 CREATE TABLE recurring_transactions (
                                         id CHAR(36) PRIMARY KEY,
                                         user_id CHAR(36),
+
                                         merchant_id INT,
                                         category_id INT,
 
                                         amount DECIMAL(18,2),
                                         frequency VARCHAR(20),
 
-                                        FOREIGN KEY (user_id) REFERENCES users(id),
+                                        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
                                         FOREIGN KEY (merchant_id) REFERENCES merchants(id),
                                         FOREIGN KEY (category_id) REFERENCES categories(id)
 );
