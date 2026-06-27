@@ -1,7 +1,7 @@
 package com.finance.repository
 
-import com.finance.entity.Asset
+import com.finance.entity.Budget
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface AssetRepository : JpaRepository<Asset, Long> {
+interface BudgetRepository : JpaRepository<Budget, Long> {
 }

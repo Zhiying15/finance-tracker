@@ -2,13 +2,12 @@ package com.finance.service.impl
 
 import com.finance.constants.TransactionStatus
 import com.finance.entity.Transaction
-import com.finance.repository.TransactionsRepository
+import com.finance.repository.TransactionRepository
 import com.finance.service.TransactionsService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-@Service
 class TransactionsServiceImpl : TransactionsService{
 
     companion object {
@@ -17,7 +16,7 @@ class TransactionsServiceImpl : TransactionsService{
     }
 
     @Autowired
-    private lateinit var transactionRepo: TransactionsRepository
+    private lateinit var transactionRepo: TransactionRepository
 
     override fun create(tx: Transaction): Transaction {
         return transactionRepo.save(tx)

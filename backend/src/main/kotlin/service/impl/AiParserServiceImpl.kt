@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-@Service
 class AiParserServiceImpl : AiParserService{
 
     companion object {
@@ -39,6 +38,6 @@ class AiParserServiceImpl : AiParserService{
 
         val response = aiClient.chat(prompt)
 
-        return AiClientProxy(response)
+        return response
     }
 }

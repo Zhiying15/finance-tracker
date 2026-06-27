@@ -1,25 +1,14 @@
 package com.finance.controller
 
+import com.finance.entity.User
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-// 1. Data class representing our payload
-data class User(val id: Long, val name: String)
-
 // 2. Class-level annotations for routing
 @RestController
 @RequestMapping("/finance-tracker/users")
-class Controller {
-
-    // GET request to /api/users
-    @GetMapping
-    fun getAllUsers(): List<User> {
-        return listOf(
-            User(1, "Alice"),
-            User(2, "Bob")
-        )
-    }
+class UserController {
 
     // GET request with a path variable (e.g., /api/users/5)
     @GetMapping("/{id}")

@@ -1,8 +1,11 @@
 package com.finance.entity;
 
 import com.fasterxml.jackson.databind.JsonNode
+import com.finance.constants.ImportReviewStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
@@ -24,5 +27,8 @@ class ImportTransaction(
     @Column(columnDefinition = "json")
     var jsonData: JsonNode? = null,
 
-    var approved: Boolean = false
+    var approved: Boolean = false,
+
+    @Enumerated(EnumType.STRING)
+    var reviewStatus: ImportReviewStatus = ImportReviewStatus.NEW,
 )

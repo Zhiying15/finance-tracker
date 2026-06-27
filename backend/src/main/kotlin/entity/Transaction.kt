@@ -49,21 +49,28 @@ class Transaction(
     @JoinColumn(name = "import_batch_id")
     var importBatch: ImportBatch? = null,
 
+    @Column(nullable = false)
     var transactionDate: LocalDate? = null,
 
     var description: String? = null,
+
+    var referenceNumber: String? = null,
 
     @Column(nullable = false)
     var amount: BigDecimal,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_code")
-    var currency: Currency? = null,
+    @Column(nullable = false)
+    var currency: Currency,
+
+    @Column(nullable = false)
+    var excahngeRate: BigDecimal? = 1.toBigDecimal(),
 
     var isManual: Boolean = false,
     var isRecurring: Boolean = false,
 
     @Enumerated(EnumType.STRING)
-    var status: TransactionStatus = TransactionStatus.DRAFT
+    var status: TransactionStatus = TransactionStatus.PENDING_REVIEW
 
 ) : BaseEntity()

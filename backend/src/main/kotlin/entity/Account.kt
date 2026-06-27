@@ -7,6 +7,8 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import java.math.BigDecimal
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
@@ -31,6 +33,17 @@ class Account(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_code")
     var currency: Currency? = null,
+
+    @Column(nullable = false)
+    var currentBalance: BigDecimal = 0.toBigDecimal(),
+
+    var manualValuation: Boolean = false,
+
+    var lastValuationDate: LocalDateTime = LocalDateTime.now(),
+
+    var includeInNetWorth: Boolean = true,
+
+    var notes: String,
 
     var isActive: Boolean = true
 

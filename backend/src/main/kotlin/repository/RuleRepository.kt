@@ -1,7 +1,7 @@
 package com.finance.repository
 
-import com.finance.entity.User
+import com.finance.entity.Rule
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface UsersRepository : JpaRepository<User, Long> {
+interface RuleRepository : JpaRepository<Rule, Long> {
 }

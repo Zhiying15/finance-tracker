@@ -3,6 +3,5 @@ package com.finance.service
 import org.springframework.stereotype.Service
 
 @Service
-interface AiParserService {
-    fun parse(text: String): List<String>
+interface DataService {
 }
