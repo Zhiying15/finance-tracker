@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/finance-tracker/category")
+@RequestMapping("/category")
 class CategoryController(private val categoryService: CategoryService) {
 
     @GetMapping

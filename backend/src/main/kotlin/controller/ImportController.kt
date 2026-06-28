@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequestMapping("/finance-tracker/import")
+@RequestMapping("/import")
 class ImportController(private val importService: ImportService) {
 
     @PostMapping("/upload")

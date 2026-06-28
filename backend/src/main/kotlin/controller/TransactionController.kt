@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/finance-tracker/txn")
+@RequestMapping("/txn")
 class TransactionController(private val transactionService: TransactionsService) {
 
     @GetMapping

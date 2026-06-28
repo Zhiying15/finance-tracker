@@ -86,7 +86,7 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: /api
+    context-path: /finance-tracker/api/v1
 
 # Custom Application Properties
 app:

@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/finance-tracker/accounts")
+@RequestMapping("/accounts")
 class AccountController(private val accountService: AccountService) {
 
     @GetMapping

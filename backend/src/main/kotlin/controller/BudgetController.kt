@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/finance-tracker/budget")
+@RequestMapping("/budget")
 class BudgetController(private val budgetService: BudgetService) {
 
     @PutMapping

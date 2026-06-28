@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity
 
 // 2. Class-level annotations for routing
 @RestController
-@RequestMapping("/finance-tracker/users")
+@RequestMapping("/auth")
 class UserController(
     private val authService: AuthService,
 ) {

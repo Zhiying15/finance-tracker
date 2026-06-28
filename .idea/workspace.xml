@@ -4,61 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="Fixing class definition for error response">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/config/OllamaConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/ParsedTransaction.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/AccountRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/BudgetRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/CreateCategoryRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/ImportTransactionReviewItem.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/ImportTransactionUpdateRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/TransactionUpdateRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/AccountResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/CategoryResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/MonthlySummaryResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/TransactionResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/BudgetService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/BudgetServiceImpl.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/utility/ReconciliationScheduler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/utility/SecurityUtils.kt" afterDir="false" />
+    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="Updating CRUD code and some basic logic for the application. Pending for code and logic review to run code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/FinanceTrackerApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/FinanceTrackerApplication.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/constants/enums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/constants/enums.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/AccountController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/AccountController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/DashboardController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/BudgetController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/DataController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/CategoryController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/BudgetController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/BudgetController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/CategoryController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/CategoryController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/ImportController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/ImportController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/TransactionController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/TransactionController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/TransactionRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/TransactionRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/AccountType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/AccountType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/BaseEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/BaseEntity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Budget.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Budget.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Category.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Category.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Currency.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Currency.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportBatch.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportBatch.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportTransaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportTransaction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Merchant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Merchant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Transaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Transaction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/TransactionType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/TransactionType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/AccountRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/AccountRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/AccountTypeRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/AccountTypeRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/BudgetRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/BudgetRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/CategoryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/CategoryRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportBatchRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportBatchRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportTransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportTransactionRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/MerchantRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/MerchantRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/TransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/TransactionRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/AccountService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/AccountService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/DataService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/CategoryService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/ImportService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/ImportService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/TransactionsService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/TransactionsService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AIParserServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AIParserServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AccountServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AccountServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AuthServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AuthServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/DataServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/CategoryServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/ImportServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/ImportServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/TransactionsServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/TransactionsServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/UserController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yml" afterDir="false" />
     </list>
@@ -307,7 +260,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782627294513</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Updating CRUD code and some basic logic for the application. Pending for code and logic review to run code">
+      <option name="closed" value="true" />
+      <created>1782650767304</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1782650767304</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +294,8 @@
     <MESSAGE value="Adding auth, security and session for user management and" />
     <MESSAGE value="Fixing class defination for error response" />
     <MESSAGE value="Fixing class definition for error response" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing class definition for error response" />
+    <MESSAGE value="Updating CRUD code and some basic logic for the application. Pending for code and logic review to run code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating CRUD code and some basic logic for the application. Pending for code and logic review to run code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
