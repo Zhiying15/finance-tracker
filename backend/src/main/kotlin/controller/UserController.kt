@@ -1,7 +1,7 @@
 package com.finance.controller
 
 import com.finance.constants.APIConstant
-import com.finance.constants.SessionConstants
+import com.finance.constants.SessionConstant
 import com.finance.dto.request.SignInRequest
 import com.finance.dto.request.UserRequest
 import com.finance.dto.response.UserResponse
@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity
 // 2. Class-level annotations for routing
 @RestController
 @RequestMapping("/finance-tracker/users")
-class AuthController(
+class UserController(
     private val authService: AuthService,
 ) {
 
@@ -48,7 +48,7 @@ class AuthController(
     @GetMapping("/me")
     fun getCurrentUser(session: HttpSession?): ResponseEntity<UserResponse> {
         val principal = session
-            ?.getAttribute(SessionConstants.USER_PRINCIPAL_KEY) as? UserPrincipal
+            ?.getAttribute(SessionConstant.USER_PRINCIPAL_KEY) as? UserPrincipal
             ?: throw AppException.Unauthorized("No active session")
 
         return ResponseEntity.ok(authService.getCurrentUser(principal))

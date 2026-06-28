@@ -1,5 +1,5 @@
 package com.finance.constants
 
-object SessionConstants {
+object SessionConstant {
     const val USER_PRINCIPAL_KEY = "USER_PRINCIPAL"
 }

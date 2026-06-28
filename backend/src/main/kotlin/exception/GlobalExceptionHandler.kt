@@ -1,19 +1,12 @@
 package com.finance.exception
 
+import com.finance.dto.response.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import java.time.LocalDateTime
-
-data class ErrorResponse(
-    val timestamp: LocalDateTime = LocalDateTime.now(),
-    val status: Int,
-    val error: String,
-    val message: String,
-    val fieldErrors: Map<String, String>? = null,
-)
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
