@@ -1,0 +1,85 @@
+spring:
+  application:
+    name: finance-tracker
+
+  # Datasource Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/finance_tracker?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Singapore
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:pssword}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA & Hibernate Configurations
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Singapore
+
+  # Redis Configuration
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  # FLYWAY
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  # Session Management
+  session:
+    store-type: redis
+    redis:
+      namespace: finance:session
+    timeout: 24h
+
+  # SECURITY (MVP)
+  security:
+    user:
+      name: admin
+      password: admin
+
+  # FILE UPLOAD & CONTEXT
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+  # Feign Client
+  cloud:
+    openfeign:
+      okhttp:
+        enabled: true
+
+  # OLLAMA (AI integration)
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.7
+
+  # Jackson Serialization
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# Custom Application Properties
+app:
+  exchange-rate:
+    base-currency: SGD
+    frankfurter-url: https://api.frankfurter.app
+    cron: "0 0 0 * * *" # Wrapped in quotes to prevent YAML parsing errors with asterisks

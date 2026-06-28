@@ -9,14 +9,14 @@ import java.time.LocalDateTime
 @MappedSuperclass
 abstract class BaseEntity {
 
-    @Column(name = "created_at", updatable = false)
-    var createdAt: LocalDateTime = LocalDateTime.now()
+    @Column(name = "created_at", nullable = false, updatable = false)
+    val createdAt: LocalDateTime = LocalDateTime.now()
 
-    @Column(name = "updated_at")
-    var updatedAt: LocalDateTime = LocalDateTime.now()
+    @Column(name = "updated_at", nullable = false)
+    val updatedAt: LocalDateTime = LocalDateTime.now()
 
-    @PreUpdate
-    fun onUpdate() {
-        updatedAt = LocalDateTime.now()
-    }
+//    @PreUpdate
+//    fun onUpdate() {
+//        updatedAt = LocalDateTime.now()
+//    }
 }

@@ -11,14 +11,16 @@ import java.util.UUID
 class User(
 
     @Id
-    var id: String = UUID.randomUUID().toString(),
+    @Column(name = "id", length = 36, nullable = false, updatable = false)
+    val id: String = UUID.randomUUID().toString(),
 
-    @Column(nullable = false, unique = true)
-    var email: String,
+    @Column(name = "email", nullable = false, unique = true, length = 255)
+    val email: String,
 
-    @Column(name = "password_hash", nullable = false)
-    var passwordHash: String,
+    @Column(name = "password_hash", nullable = false, length = 255)
+    val passwordHash: String,
 
-    var fullName: String? = null
+    @Column(name = "full_name", length = 100)
+    val fullName: String? = null,
 
 ) : BaseEntity()

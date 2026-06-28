@@ -2,9 +2,9 @@ package com.finance.constants
 
 object APIConstant {
     // Users
-    const val SIGNUP = "/signup"
-    const val SIGNIN = "/signin"
-    const val SIGNOUT = "/signout"
+    const val REGISTER = "/register"
+    const val LOGIN = "/login"
+    const val LOGOUT = "/logout"
     const val UPDATE_USER_DETAILS = "/updateUserDetails"
     const val LIST_USERS = "/listUsers"
 
