@@ -22,18 +22,19 @@ class Merchant(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int = 0,
+    val id: Int = 0,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User? = null,
+    val user: User? = null,
 
-    @Column(name = "merchant_name")
-    var merchantName: String? = null,
+    @Column(name = "merchant_name", length = 200)
+    val merchantName: String? = null,
 
-    var normalizedName: String? = null,
+    @Column(name = "normalized_name", length = 200)
+    val normalizedName: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "default_category_id")
-    var defaultCategory: Category? = null
+    val defaultCategory: Category? = null,
 )

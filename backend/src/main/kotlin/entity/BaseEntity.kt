@@ -13,10 +13,10 @@ abstract class BaseEntity {
     val createdAt: LocalDateTime = LocalDateTime.now()
 
     @Column(name = "updated_at", nullable = false)
-    val updatedAt: LocalDateTime = LocalDateTime.now()
+    var updatedAt: LocalDateTime = LocalDateTime.now()
 
-//    @PreUpdate
-//    fun onUpdate() {
-//        updatedAt = LocalDateTime.now()
-//    }
+    @PreUpdate
+    fun onUpdate() {
+        updatedAt = LocalDateTime.now()
+    }
 }

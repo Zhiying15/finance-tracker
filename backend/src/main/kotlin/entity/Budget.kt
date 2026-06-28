@@ -1,5 +1,6 @@
 package com.finance.entity
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.Id
@@ -20,17 +21,29 @@ import java.util.UUID
 class Budget(
 
     @Id
-    var id: String = UUID.randomUUID().toString(),
+    @Column(name = "id", length = 36, updatable = false, nullable = false)
+    val id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User,
+    val user: User,
 
-    var year: Int,
-    var month: Int,
+    @Column(name = "year", nullable = false)
+    val year: Int,
 
-    var needPercent: BigDecimal,
-    var wantPercent: BigDecimal,
-    var savingsPercent: BigDecimal
+    @Column(name = "month", nullable = false)
+    val month: Int,
+
+    @Column(name = "need_percent", precision = 5, scale = 2)
+    val needPercent: BigDecimal? = null,
+
+    @Column(name = "want_percent", precision = 5, scale = 2)
+    val wantPercent: BigDecimal? = null,
+
+    @Column(name = "savings_percent", precision = 5, scale = 2)
+    val savingsPercent: BigDecimal? = null,
+
+    @Column(name = "declared_income", precision = 18, scale = 2)
+    val declaredIncome: BigDecimal? = null,
 
 ) : BaseEntity()

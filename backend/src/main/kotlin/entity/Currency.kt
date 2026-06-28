@@ -10,10 +10,12 @@ import jakarta.persistence.Table
 class Currency(
 
     @Id
-    @Column(length = 3)
-    var code: String,
+    @Column(name = "code", length = 3)
+    val code: String,
 
-    var name: String,
+    @Column(name = "name", nullable = false, length = 50)
+    val name: String,
 
-    var symbol: String? = null
+    @Column(name = "symbol", length = 10)
+    val symbol: String? = null,
 )

@@ -1,6 +1,6 @@
 package com.finance.service.impl
 
-import com.finance.constants.SessionConstants
+import com.finance.constants.SessionConstant
 import com.finance.dto.request.SignInRequest
 import com.finance.dto.request.UserRequest
 import com.finance.dto.response.UserResponse
@@ -13,15 +13,18 @@ import com.finance.service.AuthService
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpSession
+import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class AuthServAuthServiceImpl(
+class AuthServiceImpl(
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder,
 ) : AuthService {
+
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @Transactional
     override fun register(request: UserRequest): UserResponse {
@@ -62,7 +65,7 @@ class AuthServAuthServiceImpl(
             email = user.email,
             fullName = user.fullName,
         )
-        session.setAttribute(SessionConstants.USER_PRINCIPAL_KEY, principal)
+        session.setAttribute(SessionConstant.USER_PRINCIPAL_KEY, principal)
 
         return UserResponse(
             userId = user.id,

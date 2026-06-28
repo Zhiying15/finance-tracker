@@ -1,5 +1,6 @@
 package com.finance.entity
 
+import com.finance.constants.BudgetType
 import com.finance.constants.TransactionStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -19,57 +20,72 @@ import java.util.UUID
 class Transaction(
 
     @Id
-    var id: String = UUID.randomUUID().toString(),
+    @Column(name = "id", length = 36, updatable = false, nullable = false)
+    val id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    var user: User,
+    val user: User,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "from_account_id")
-    var fromAccount: Account? = null,
+    val fromAccount: Account? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "to_account_id")
-    var toAccount: Account? = null,
+    val toAccount: Account? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transaction_type_id")
-    var transactionType: TransactionType? = null,
+    val transactionType: TransactionType? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    var category: Category? = null,
+    val category: Category? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "merchant_id")
-    var merchant: Merchant? = null,
+    val merchant: Merchant? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "import_batch_id")
-    var importBatch: ImportBatch? = null,
+    val importBatch: ImportBatch? = null,
 
-    @Column(nullable = false)
-    var transactionDate: LocalDate? = null,
+    @Column(name = "transaction_date", nullable = false)
+    val transactionDate: LocalDate,
 
-    var description: String? = null,
+    @Column(name = "description", columnDefinition = "TEXT")
+    val description: String? = null,
 
-    var referenceNumber: String? = null,
+    @Column(name = "reference_number", length = 100)
+    val referenceNumber: String? = null,
 
-    @Column(nullable = false)
-    var amount: BigDecimal,
+    @Column(name = "amount", nullable = false, precision = 18, scale = 2)
+    val amount: BigDecimal,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "currency_code")
-    var currency: Currency,
+    @JoinColumn(name = "currency_code", nullable = false)
+    val currency: Currency,
 
-    @Column(nullable = false)
-    var excahngeRate: BigDecimal? = 1.toBigDecimal(),
+    @Column(name = "exchange_rate", precision = 18, scale = 8)
+    val exchangeRate: BigDecimal = BigDecimal.ONE,
 
-    var isManual: Boolean = false,
-    var isRecurring: Boolean = false,
+    @Column(name = "remarks", columnDefinition = "TEXT")
+    val remarks: String? = null,
+
+    @Column(name = "is_manual")
+    val isManual: Boolean = false,
+
+    @Column(name = "is_recurring")
+    val isRecurring: Boolean = false,
 
     @Enumerated(EnumType.STRING)
-    var status: TransactionStatus = TransactionStatus.PENDING_REVIEW
+    @Column(name = "status")
+    var status: TransactionStatus = TransactionStatus.PENDING_REVIEW,
 
-) : BaseEntity()
+    @Enumerated(EnumType.STRING)
+    @Column(name = "budget_type")
+    var budgetType: BudgetType? = null,
+
+
+    ) : BaseEntity()

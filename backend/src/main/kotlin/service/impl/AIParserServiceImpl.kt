@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service
 class AIParserServiceImpl(
     private val chatModel: OllamaChatModel ) : AIParserService{
 
-    companion object {
-        // Replaces Lombok's @Slf4j log instance
-        private val log = LoggerFactory.getLogger(AIParserServiceImpl::class.java)
-    }
+    private val log = LoggerFactory.getLogger(javaClass)
 
     override fun parse(text: String): List<String> {
 

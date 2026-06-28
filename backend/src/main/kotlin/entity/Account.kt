@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.math.BigDecimal
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -16,35 +17,46 @@ import java.util.UUID
 class Account(
 
     @Id
-    var id: String = UUID.randomUUID().toString(),
+    @Column(name = "id", length = 36, updatable = false, nullable = false)
+    val id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    var user: User,
+    @JoinColumn(name = "user_id", nullable = false)
+    val user: User,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_type_id")
-    var accountType: AccountType,
+    @JoinColumn(name = "account_type_id", nullable = false)
+    val accountType: AccountType,
 
-    var name: String,
+    @Column(name = "name", nullable = false, length = 100)
+    val name: String,
 
-    var institution: String? = null,
+    @Column(name = "institution", length = 100)
+    val institution: String? = null,
+
+    @Column(name = "account_number", length = 100)
+    val accountNumber: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "currency_code")
-    var currency: Currency? = null,
+    @JoinColumn(name = "currency_code", nullable = false)
+    val currency: Currency,
 
-    @Column(nullable = false)
-    var currentBalance: BigDecimal = 0.toBigDecimal(),
+    @Column(name = "current_balance", nullable = false, precision = 18, scale = 2)
+    var currentBalance: BigDecimal = BigDecimal.ZERO,
 
-    var manualValuation: Boolean = false,
+    @Column(name = "manual_valuation")
+    val manualValuation: Boolean = false,
 
-    var lastValuationDate: LocalDateTime = LocalDateTime.now(),
+    @Column(name = "last_valuation_date")
+    val lastValuationDate: LocalDate? = null,
 
-    var includeInNetWorth: Boolean = true,
+    @Column(name = "include_in_net_worth")
+    val includeInNetWorth: Boolean = true,
 
-    var notes: String,
+    @Column(name = "notes", columnDefinition = "TEXT")
+    val notes: String? = null,
 
-    var isActive: Boolean = true
+    @Column(name = "is_active")
+    val isActive: Boolean = true
 
 ) : BaseEntity()

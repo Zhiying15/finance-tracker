@@ -1,5 +1,6 @@
 package com.finance.entity
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.Id
@@ -14,14 +15,20 @@ import java.util.UUID
 class ImportBatch(
 
     @Id
-    var id: String = UUID.randomUUID().toString(),
+    @Column(name = "id", length = 36, updatable = false, nullable = false)
+    val id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User? = null,
+    val user: User,
 
-    var filename: String? = null,
-    var status: String? = null,
+    @Column(name = "filename", length = 255)
+    val filename: String? = null,
 
-    var uploadedAt: LocalDateTime = LocalDateTime.now()
+    @Column(name = "status", length = 50)
+    var status: String = "PROCESSING",
+
+    @Column(name = "uploaded_at", updatable = false)
+    val uploadedAt: LocalDateTime = LocalDateTime.now(),
+
 ) : BaseEntity()

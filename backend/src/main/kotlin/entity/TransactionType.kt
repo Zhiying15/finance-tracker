@@ -1,6 +1,7 @@
 package com.finance.entity
 
 import com.finance.constants.TransactionFlow
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -15,10 +16,12 @@ class TransactionType(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int = 0,
+    val id: Int = 0,
 
-    var name: String,
+    @Column(name = "name", nullable = false, unique = true, length = 50)
+    val name: String,
 
     @Enumerated(EnumType.STRING)
-    var flow: TransactionFlow
+    @Column(name = "flow", nullable = false)
+    val flow: TransactionFlow,
 )
