@@ -23,7 +23,7 @@
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
-    "isolatedModules": true,          // ✅ ADDED — required by Vite's esbuild
+    "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
 
@@ -37,17 +37,16 @@
 
     /* Alias */
 
-    "baseUrl": ".",
-
     "paths": {
-      "@/*": ["src/*"],
-      "@api/*": ["src/api/*"],
-      "@components/*": ["src/components/*"],
-      "@features/*": ["src/features/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@store/*": ["src/store/*"],
-      "@lib/*": ["src/lib/*"],
-      "@types/*": ["src/types/*"]
+      "@/*":           ["./src/*"],
+      "@api/*":        ["./src/api/*"],
+      "@components/*": ["./src/components/*"],
+      "@features/*":   ["./src/features/*"],
+      "@hooks/*":      ["./src/hooks/*"],
+      "@store/*":      ["./src/store/*"],
+      "@lib/*":        ["./src/lib/*"],
+      "@type/*":      ["./src/type/*"],
+      "@pages/*":      ["./src/pages/*"]
     },
 
     /* Lint */

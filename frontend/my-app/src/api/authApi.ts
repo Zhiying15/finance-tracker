@@ -1,5 +1,6 @@
 import { api } from "./axios";
 import { ENDPOINTS } from "./endpoints";
+import type { LoginRequest, RegisterRequest } from "@type/index";
 
 export function login(request: LoginRequest){
 
