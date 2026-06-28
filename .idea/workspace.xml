@@ -4,33 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="updating controller and service class for CRUD operations">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/config/RedisConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/config/SecurityConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/config/WebClientConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/constants/SessionConstant.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/UserResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/exception/AppException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/exception/GlobalExceptionHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/security/UserPrincipal.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/AuthService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AuthServiceImpl.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/UserDetailsServiceImpl.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/constants/APIConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/constants/APIConstant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/controller/UserController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/SignInRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/SignInRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/TransactionRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/TransactionRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/UserRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/UserRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/BaseEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/BaseEntity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/UserRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/UserService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/UserServiceImpl.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="Fixing class defination for error response">
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/config/SecurityConfig.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +228,23 @@
       <option name="project" value="LOCAL" />
       <updated>1782577431397</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Adding auth, security and session for user management and">
+      <option name="closed" value="true" />
+      <created>1782626942618</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1782626942618</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fixing class defination for error response">
+      <option name="closed" value="true" />
+      <created>1782627074842</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1782627074842</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,7 +267,9 @@
     <MESSAGE value="renames" />
     <MESSAGE value="updating schemas and creating controller and service class to start off" />
     <MESSAGE value="updating controller and service class for CRUD operations" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating controller and service class for CRUD operations" />
+    <MESSAGE value="Adding auth, security and session for user management and" />
+    <MESSAGE value="Fixing class defination for error response" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing class defination for error response" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

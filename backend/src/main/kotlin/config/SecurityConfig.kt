@@ -1,7 +1,7 @@
 package com.finance.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.finance.exception.ErrorResponse
+import com.finance.dto.response.ErrorResponse
 import com.finance.service.impl.UserDetailsServiceImpl
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
