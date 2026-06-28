@@ -20,9 +20,10 @@
 
     /* Bundler */
 
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
+    "isolatedModules": true,          // ✅ ADDED — required by Vite's esbuild
     "moduleDetection": "force",
     "noEmit": true,
 

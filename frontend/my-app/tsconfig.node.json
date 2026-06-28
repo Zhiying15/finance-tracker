@@ -3,13 +3,14 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2023",
     "lib": ["ES2023"],
-    "module": "NodeNext",
+    "module": "ESNext",               // ✅ CHANGED from NodeNext
     "types": ["node"],
     "skipLibCheck": true,
 
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Bundler",    // ✅ CHANGED from NodeNext — Vite processes this
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
+    "isolatedModules": true,          // ✅ ADDED
     "moduleDetection": "force",
     "noEmit": true,
     "strict": true,
