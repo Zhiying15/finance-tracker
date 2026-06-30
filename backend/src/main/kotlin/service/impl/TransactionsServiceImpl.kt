@@ -205,17 +205,14 @@ class TransactionsServiceImpl(
             ?: category?.budgetType
             ?: tx.budgetType
 
-        val updated = tx.copy(
-            category = category,
-            merchant = merchant,
-            budgetType = resolvedBudgetType,
-            description = request.description ?: tx.description,
-            remarks = request.remarks ?: tx.remarks,
-            transactionDate = request.transactionDate ?: tx.transactionDate,
-            status = request.status ?: tx.status,
-            updatedAt = java.time.LocalDateTime.now(),
-        )
+        tx.category = category
+        tx.merchant = merchant
+        tx.budgetType = resolvedBudgetType
+        tx.description = request.description ?: tx.description
+        tx.remarks = request.remarks ?: tx.remarks
+        tx.transactionDate = request.transactionDate ?: tx.transactionDate
+        tx.status = request.status ?: tx.status
 
-        return TransactionResponse.from(transactionRepository.save(updated))
+        return TransactionResponse.from(transactionRepository.save(tx))
     }
 }

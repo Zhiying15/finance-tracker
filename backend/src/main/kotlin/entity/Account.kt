@@ -57,6 +57,6 @@ class Account(
     val notes: String? = null,
 
     @Column(name = "is_active")
-    val isActive: Boolean = true
+    var isActive: Boolean = true
 
 ) : BaseEntity()

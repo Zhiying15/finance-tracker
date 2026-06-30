@@ -35,15 +35,11 @@ class BudgetServiceImpl(
         val existing = budgetRepository.findByUserIdAndYearAndMonth(userId, request.year, request.month)
 
         return if (existing != null) {
-            budgetRepository.save(
-                existing.copy(
-                    needPercent = request.needPercent,
-                    wantPercent = request.wantPercent,
-                    savingsPercent = request.savingsPercent,
-                    declaredIncome = request.declaredIncome,
-                    updatedAt = java.time.LocalDateTime.now(),
-                )
-            )
+            existing.needPercent = request.needPercent
+            existing.wantPercent = request.wantPercent
+            existing.savingsPercent = request.savingsPercent
+            existing.declaredIncome = request.declaredIncome
+            budgetRepository.save(existing)
         } else {
             budgetRepository.save(
                 Budget(

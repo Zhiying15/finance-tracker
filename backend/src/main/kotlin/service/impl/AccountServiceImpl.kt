@@ -60,12 +60,9 @@ class AccountServiceImpl(
         val account = accountRepository.findByIdAndUserId(accountId, userId)
             ?: throw AppException.Forbidden("Account not found or access denied")
 
-        accountRepository.save(
-            account.copy(
-                isActive = false,
-                updatedAt = LocalDateTime.now(),
-            )
-        )
+        account.isActive = false
+        // updatedAt is handled automatically by @PreUpdate in BaseEntity — no manual set needed
+        accountRepository.save(account)
     }
 
     @Transactional(readOnly = true)

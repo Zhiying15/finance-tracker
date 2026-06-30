@@ -41,21 +41,21 @@ class Transaction(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    val category: Category? = null,
+    var category: Category? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "merchant_id")
-    val merchant: Merchant? = null,
+    var merchant: Merchant? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "import_batch_id")
     val importBatch: ImportBatch? = null,
 
     @Column(name = "transaction_date", nullable = false)
-    val transactionDate: LocalDate,
+    var transactionDate: LocalDate,
 
     @Column(name = "description", columnDefinition = "TEXT")
-    val description: String? = null,
+    var description: String? = null,
 
     @Column(name = "reference_number", length = 100)
     val referenceNumber: String? = null,
@@ -71,7 +71,7 @@ class Transaction(
     val exchangeRate: BigDecimal = BigDecimal.ONE,
 
     @Column(name = "remarks", columnDefinition = "TEXT")
-    val remarks: String? = null,
+    var remarks: String? = null,
 
     @Column(name = "is_manual")
     val isManual: Boolean = false,

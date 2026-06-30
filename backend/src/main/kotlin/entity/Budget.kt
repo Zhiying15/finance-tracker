@@ -35,15 +35,15 @@ class Budget(
     val month: Int,
 
     @Column(name = "need_percent", precision = 5, scale = 2)
-    val needPercent: BigDecimal? = null,
+    var needPercent: BigDecimal? = null,
 
     @Column(name = "want_percent", precision = 5, scale = 2)
-    val wantPercent: BigDecimal? = null,
+    var wantPercent: BigDecimal? = null,
 
     @Column(name = "savings_percent", precision = 5, scale = 2)
-    val savingsPercent: BigDecimal? = null,
+    var savingsPercent: BigDecimal? = null,
 
     @Column(name = "declared_income", precision = 18, scale = 2)
-    val declaredIncome: BigDecimal? = null,
+    var declaredIncome: BigDecimal? = null,
 
 ) : BaseEntity()

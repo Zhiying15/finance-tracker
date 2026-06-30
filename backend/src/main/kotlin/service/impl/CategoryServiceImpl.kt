@@ -66,7 +66,7 @@ class CategoryServiceImpl(
             throw AppException.Forbidden("System categories cannot be deleted")
         }
 
-        if (category.user.id != userId) {
+        if (category.user!!.id != userId) {
             throw AppException.Forbidden("Access denied")
         }
 

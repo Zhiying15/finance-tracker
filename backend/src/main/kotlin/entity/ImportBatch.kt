@@ -28,7 +28,4 @@ class ImportBatch(
     @Column(name = "status", length = 50)
     var status: String = "PROCESSING",
 
-    @Column(name = "uploaded_at", updatable = false)
-    val uploadedAt: LocalDateTime = LocalDateTime.now(),
-
 ) : BaseEntity()
