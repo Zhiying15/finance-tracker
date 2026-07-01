@@ -31,7 +31,8 @@ class ReconciliationScheduler(
                     "Balance drift detected for account ${account.id}: " +
                             "stored=${account.currentBalance}, recomputed=$recomputedBalance. Patching."
                 )
-                accountRepository.save(account.copy(currentBalance = recomputedBalance))
+                account.currentBalance = recomputedBalance
+                accountRepository.save(account)
             }
         }
 

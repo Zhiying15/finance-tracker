@@ -19,9 +19,7 @@ java {
 
 repositories {
     mavenCentral()
-    // FIX 1: Required for Spring AI milestone versions (like 1.0.0-M1)
     maven { url = uri("https://spring.io") }
-    maven { url = uri("https://repo.spring.io/milestone") }
 }
 
 // FIX 2: Define BOM versions for Spring Cloud
@@ -30,6 +28,7 @@ val springCloudVersion = "2025.0.3"
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+        mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
     }
 }
 
@@ -50,9 +49,6 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.3")
 
-    // --- WebClient (for Frankfurter API) ---
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
     // --- Kotlin ---
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -68,7 +64,8 @@ dependencies {
     implementation("io.github.openfeign:feign-okhttp:13.5")
 
     // Ollama (AI) integration
-    implementation("org.springframework.ai:spring-ai-ollama-spring-boot-starter:1.0.0-M1")
+    implementation("org.springframework.ai:spring-ai-ollama")
+    implementation("org.springframework.ai:spring-ai-starter-model-ollama")
 
     // PDF parsing
     implementation("org.apache.pdfbox:pdfbox:2.0.30")

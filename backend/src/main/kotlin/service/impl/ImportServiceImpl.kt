@@ -10,6 +10,7 @@ import com.finance.entity.Account
 import com.finance.entity.ImportBatch
 import com.finance.entity.ImportTransaction
 import com.finance.entity.Transaction
+import com.finance.entity.User
 import java.nio.charset.StandardCharsets
 import com.finance.exception.AppException
 import com.finance.repository.AccountRepository
@@ -40,54 +41,38 @@ class ImportServiceImpl(
 
     @Transactional
     override fun uploadFile(userId: String, file: MultipartFile, accountId: String): String {
-        val user = userRepository.findById(userId)
+        val user: User = userRepository.findById(userId)
             .orElseThrow { AppException.NotFound("User not found") }
 
-        // Verify account ownership (BOLA protection)
         accountRepository.findByIdAndUserId(accountId, userId)
             ?: throw AppException.Forbidden("Account not found or access denied")
 
-        val batch = importBatchRepository.save(
-            ImportBatch(
-                user = user,
-                filename = file.originalFilename,
-                status = "PROCESSING",
-            )
+        val newBatch: ImportBatch = ImportBatch(
+            user = user,
+            filename = file.originalFilename,
+            status = "PROCESSING",
         )
+        val batch: ImportBatch = importBatchRepository.save(newBatch)
 
         val content = file.inputStream.readBytes().toString(StandardCharsets.UTF_8)
         val rows = content.lines().filter { it.isNotBlank() }
 
-        // Process each row through Ollama
         rows.forEachIndexed { index, row ->
-            try {
-                val result = ollamaParserService.parseRow(row)
+            val result = ollamaParserService.parseRow(row)
 
-                val duplicateStatus = when {
-                    result.parseError != null -> ReviewStatus.NEW
-                    isDuplicate(userId, result.parsed) -> ReviewStatus.POSSIBLE_DUPLICATE
-                    else -> ReviewStatus.NEW
-                }
-
-                importTransactionRepository.save(
-                    ImportTransaction(
-                        batch = batch,
-                        jsonData = result.parsed?.let { objectMapper.writeValueAsString(it) },
-                        parseError = result.parseError,
-                        reviewStatus = duplicateStatus,
-                    )
-                )
-            } catch (ex: Exception) {
-                log.error("Failed processing row $index in batch ${batch.id}: ${ex.message}")
-                importTransactionRepository.save(
-                    ImportTransaction(
-                        batch = batch,
-                        jsonData = null,
-                        parseError = "System error processing row: ${ex.message?.take(400)}",
-                        reviewStatus = ReviewStatus.NEW,
-                    )
-                )
+            val duplicateStatus: ReviewStatus = when {
+                result.parseError != null -> ReviewStatus.NEW
+                isDuplicate(userId, result.parsed) -> ReviewStatus.POSSIBLE_DUPLICATE
+                else -> ReviewStatus.NEW
             }
+
+            val newImportTx: ImportTransaction = ImportTransaction(
+                batch = batch,
+                jsonData = result.parsed?.let { objectMapper.writeValueAsString(it) },
+                parseError = result.parseError,
+                reviewStatus = duplicateStatus,
+            )
+            importTransactionRepository.save(newImportTx)
         }
 
         batch.status = "PENDING_REVIEW"
@@ -122,13 +107,11 @@ class ImportServiceImpl(
         val importTx = importTransactionRepository.findByIdAndBatchId(importTxId, batchId)
             ?: throw AppException.NotFound("Import transaction not found")
 
-        // Merge user edits back into JSON
-        val updated = importTx.copy(
-            jsonData = objectMapper.writeValueAsString(request),
-            reviewStatus = ReviewStatus.NEW,
-            parseError = null,
-        )
-        return importTransactionRepository.save(updated).toReviewItem()
+        importTx.jsonData = objectMapper.writeValueAsString(importTx)
+        importTx.reviewStatus = ReviewStatus.NEW
+        importTx.parseError = null
+
+        return importTransactionRepository.save(importTx).toReviewItem()
     }
 
     @Transactional

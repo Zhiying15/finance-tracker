@@ -1,84 +1,94 @@
 package com.finance.service.impl
 
-import org.springframework.ai.chat.prompt.Prompt
-import org.springframework.ai.ollama.OllamaChatModel
-import com.finance.service.AIParserService
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.finance.dto.OllamaParseResult
+import com.finance.dto.ParsedTransaction
 import org.slf4j.LoggerFactory
-import org.springframework.ai.converter.ListOutputConverter
-import org.springframework.core.convert.support.DefaultConversionService
+import org.springframework.ai.chat.messages.SystemMessage
+import org.springframework.ai.chat.messages.UserMessage
+import org.springframework.ai.chat.model.ChatModel
+import org.springframework.ai.chat.prompt.Prompt
+import org.springframework.ai.converter.BeanOutputConverter
 import org.springframework.stereotype.Service
 
-
 @Service
-class AIParserServiceImpl(
-    private val chatModel: OllamaChatModel ) : AIParserService{
-
+class OllamaParserService(
+    // Spring AI auto-configures and injects OllamaChatModel via the starter
+    private val chatModel: ChatModel,
+    private val objectMapper: ObjectMapper,
+) {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    override fun parse(text: String): List<String> {
+    // BeanOutputConverter generates a strict JSON Schema from ParsedTransaction
+    // and provides a convert() method to deserialize the model's response
+    private val outputConverter = BeanOutputConverter(ParsedTransaction::class.java)
 
-        val prompt = """
-            Extract transactions from this bank statement.
-
-            Return JSON array:
-            [
-              {
-                "date": "...",
-                "amount": ...,
-                "merchant": "...",
-                "type": "...",
-                "currency": "SGD"
-              }
-            ]
-
-            TEXT:
-            $text
+    private val systemPrompt = SystemMessage(
+        """
+        You are a financial data extraction engine.
+        Extract transaction data from the provided raw CSV row text.
+        Return ONLY a valid JSON object that strictly conforms to the provided schema.
+        Do not include any explanation, markdown, code fences, or extra text.
+        If a field cannot be found in the input, return null for that field.
+        For transactionDate, use ISO format: YYYY-MM-DD.
+        For amount, always return a positive number.
+        For isInflow, return true if money was received (credit), false if money was spent (debit).
+        For currency, return the 3-letter ISO code (e.g. SGD, USD).
         """.trimIndent()
+    )
 
-        val response = generateListLocally(prompt)
+    fun parseRow(rawRow: String): OllamaParseResult {
+        if (rawRow.isBlank()) {
+            return OllamaParseResult(null, "Empty row")
+        }
 
-        return response
+        return try {
+            val userMessage = UserMessage(
+                """
+                Extract transaction data from this raw CSV row and return JSON matching the schema below.
+                
+                Schema:
+                ${outputConverter.jsonSchema}
+                
+                Raw CSV row:
+                $rawRow
+                """.trimIndent()
+            )
+
+            val prompt = Prompt(
+                listOf(systemPrompt, userMessage),
+//                OllamaChatOptions.builder()
+//                    .temperature(0.0)         // Deterministic output — critical for JSON extraction
+//                    .enableThinking()         // Qwen3 thinking mode ON
+//                    .numPredict(1024)
+//                    .build()
+            )
+
+            val response = chatModel.call(prompt)
+            val rawContent = response.result.output.text
+
+            if (rawContent.isNullOrBlank()) {
+                return OllamaParseResult(null, "Ollama returned empty response")
+            }
+
+            // Strip any accidental markdown fences despite instructions
+            val cleanedJson = rawContent
+                .trim()
+                .removePrefix("```json")
+                .removePrefix("```")
+                .removeSuffix("```")
+                .trim()
+
+            // BeanOutputConverter handles deserialization with Jackson
+            val parsed: ParsedTransaction = outputConverter.convert(cleanedJson)
+                ?: return OllamaParseResult(null, "Failed to deserialize Ollama response")
+
+            OllamaParseResult(parsed = parsed, parseError = null)
+
+        } catch (ex: Exception) {
+            val errorMessage = "Parse failed: ${ex.message?.take(400)}"
+            log.warn("Ollama parsing failed for row [$rawRow]: ${ex.message}")
+            OllamaParseResult(null, errorMessage)
+        }
     }
-
-    /**
-     * Internal function for other backend classes to call.
-     * It uses the streaming API underneath but blocks until completion to return a clean String.
-     */
-
-    fun analyzeDataLocally(userPrompt: String): String {
-        val aiPrompt = Prompt(userPrompt)
-
-        // Consume the streaming data packets internally and compile them into a String
-        val finalResult = chatModel.stream(aiPrompt)
-            .map { response -> response.result?.output?.content ?: "" }
-            .filter { token -> token.isNotEmpty() }
-            .collectList()                    // Collects stream fragments to Mono<List<String>>
-            .map { list -> list.joinToString("") } // Joins fragments into a single string text block
-            .block()                          // Synchronously block until completion
-
-        return finalResult ?: "No response generated by the local AI engine."
-    }
-
-    // Implement the new List method
-    fun generateListLocally(userPrompt: String): List<String> {
-        // 1. Create a converter that transforms plain text comma-separated or JSON lists into a Kotlin List
-        val converter = ListOutputConverter(DefaultConversionService())
-
-        // 2. Format your prompt to append strict formatting rules that the AI must follow
-        val formatInstructions = converter.format
-        val completePromptText = "$userPrompt\n\n$formatInstructions"
-        val aiPrompt = Prompt(completePromptText)
-
-        // 3. Collect the stream tokens into a single text block
-        val rawTextResult = chatModel.stream(aiPrompt)
-            .map { response -> response.result?.output?.content ?: "" }
-            .filter { token -> token.isNotEmpty() }
-            .collectList()
-            .map { list -> list.joinToString("") }
-            .block() ?: ""
-
-        // 4. Let the converter transform the text string safely into a List<String>
-        return converter.convert(rawTextResult) ?: emptyList()
-    }
-
 }

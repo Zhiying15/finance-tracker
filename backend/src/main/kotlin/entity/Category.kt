@@ -1,5 +1,6 @@
 package com.finance.entity
 
+import com.finance.constants.BudgetType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType
