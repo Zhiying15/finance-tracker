@@ -10,12 +10,11 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
-@Table(name = "import_transactions")
-class ImportTransaction(
+@Table(name = "imported_transactions")
+class ImportedTransaction(
 
     @Id
     @Column(name = "id", length = 36, updatable = false, nullable = false)
@@ -23,7 +22,7 @@ class ImportTransaction(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "batch_id", nullable = false)
-    val batch: ImportBatch,
+    val file: ImportedFile,
 
     @Column(name = "json_data", columnDefinition = "JSON")
     var jsonData: String? = null,
@@ -38,7 +37,4 @@ class ImportTransaction(
     @Column(name = "approved")
     var approved: Boolean = false,
 
-    ) {
-    @Column(name = "created_at", updatable = false, nullable = false)
-    val createdAt: LocalDateTime = LocalDateTime.now()
-}
+    ) : BaseEntity()

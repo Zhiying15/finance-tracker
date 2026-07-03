@@ -1,6 +1,7 @@
 package com.finance.dto.request
 
 import com.finance.constants.BudgetType
+import com.finance.constants.TransactionFlow
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
 import java.math.BigDecimal
@@ -11,7 +12,8 @@ data class TransactionRequest(
     val toAccountId: String? = null,
 
     @field:NotNull(message = "Transaction type is required")
-    val transactionTypeId: Int,
+    val transactionTypeId: TransactionFlow
+    ,
 
     val categoryId: Int? = null,
     val merchantId: Int? = null,

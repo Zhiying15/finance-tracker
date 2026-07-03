@@ -4,17 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="Fixing errors">
+    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="Fixing errors to complie code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/clients/OllamaStreamClient.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/ParsedTransaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/ParsedTransaction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/CreateCategoryRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/CreateCategoryRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Category.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Category.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AIParserServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/AIParserServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/constants/enums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/constants/enums.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/controller/CategoryController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/CreateCategoryRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/TransactionRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/request/TransactionRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/CategoryResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/TransactionResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/dto/response/TransactionResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Category.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportBatch.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportedFile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportTransaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportedTransaction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Merchant.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/RecurringTransaction.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Rule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Transaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Transaction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/TransactionType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/CategoryRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportBatchRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportedFileRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportTransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/repository/ImportedTransactionRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/MerchantRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/RecurringTransactionRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/RuleRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/repository/TransactionTypeRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/CategoryService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/ImportService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/ImportService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/CategoryServiceImpl.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/ImportServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/ImportServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/TransactionsServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/service/impl/TransactionsServiceImpl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +161,7 @@
       <recent name="com.finance.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.backend [build]">
+  <component name="RunManager" selected="Spring Boot.FinanceTrackerApplication">
     <configuration name="backend [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -210,9 +228,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.FinanceTrackerApplication" />
         <item itemvalue="Gradle.backend [build]" />
         <item itemvalue="Gradle.backend [buildDependents]" />
-        <item itemvalue="Spring Boot.FinanceTrackerApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -312,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782834495807</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fixing errors to complie code">
+      <option name="closed" value="true" />
+      <created>1782921317410</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1782921317410</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,7 +367,8 @@
     <MESSAGE value="Updating CRUD code and some basic logic for the application. Pending for code and logic review to run code" />
     <MESSAGE value="Updating routes paths" />
     <MESSAGE value="Fixing errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing errors" />
+    <MESSAGE value="Fixing errors to complie code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing errors to complie code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

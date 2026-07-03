@@ -7,18 +7,17 @@ import com.finance.dto.ParsedTransaction
 import com.finance.dto.request.ImportTransactionReviewItem
 import com.finance.dto.request.ImportTransactionUpdateRequest
 import com.finance.entity.Account
-import com.finance.entity.ImportBatch
-import com.finance.entity.ImportTransaction
+import com.finance.entity.ImportedFile
+import com.finance.entity.ImportedTransaction
 import com.finance.entity.Transaction
 import com.finance.entity.User
 import java.nio.charset.StandardCharsets
 import com.finance.exception.AppException
 import com.finance.repository.AccountRepository
-import com.finance.repository.ImportBatchRepository
-import com.finance.repository.ImportTransactionRepository
+import com.finance.repository.ImportedFileRepository
+import com.finance.repository.ImportedTransactionRepository
 import com.finance.repository.TransactionRepository
 import com.finance.repository.UserRepository
-import com.finance.service.AIParserService
 import com.finance.service.ImportService
 import org.springframework.transaction.annotation.Transactional
 import org.slf4j.LoggerFactory
@@ -28,8 +27,8 @@ import java.math.BigDecimal
 
 @Service
 class ImportServiceImpl(
-    private val importBatchRepository: ImportBatchRepository,
-    private val importTransactionRepository: ImportTransactionRepository,
+    private val importBatchRepository: ImportedFileRepository,
+    private val importedTransactionRepository: ImportedTransactionRepository,
     private val transactionRepository: TransactionRepository,
     private val accountRepository: AccountRepository,
     private val userRepository: UserRepository,
@@ -47,12 +46,12 @@ class ImportServiceImpl(
         accountRepository.findByIdAndUserId(accountId, userId)
             ?: throw AppException.Forbidden("Account not found or access denied")
 
-        val newBatch: ImportBatch = ImportBatch(
+        val newBatch: ImportedFile = ImportedFile(
             user = user,
             filename = file.originalFilename,
             status = "PROCESSING",
         )
-        val batch: ImportBatch = importBatchRepository.save(newBatch)
+        val batch: ImportedFile = importBatchRepository.save(newBatch)
 
         val content = file.inputStream.readBytes().toString(StandardCharsets.UTF_8)
         val rows = content.lines().filter { it.isNotBlank() }
@@ -66,13 +65,13 @@ class ImportServiceImpl(
                 else -> ReviewStatus.NEW
             }
 
-            val newImportTx: ImportTransaction = ImportTransaction(
-                batch = batch,
+            val newImportTx: ImportedTransaction = ImportedTransaction(
+                file = batch,
                 jsonData = result.parsed?.let { objectMapper.writeValueAsString(it) },
                 parseError = result.parseError,
                 reviewStatus = duplicateStatus,
             )
-            importTransactionRepository.save(newImportTx)
+            importedTransactionRepository.save(newImportTx)
         }
 
         batch.status = "PENDING_REVIEW"
@@ -88,7 +87,7 @@ class ImportServiceImpl(
 
         if (batch.user.id != userId) throw AppException.Forbidden("Access denied")
 
-        return importTransactionRepository.findAllByBatchId(batchId)
+        return importedTransactionRepository.findAllByBatchId(batchId)
             .map { it.toReviewItem() }
     }
 
@@ -104,14 +103,14 @@ class ImportServiceImpl(
 
         if (batch.user.id != userId) throw AppException.Forbidden("Access denied")
 
-        val importTx = importTransactionRepository.findByIdAndBatchId(importTxId, batchId)
+        val importTx = importedTransactionRepository.findByIdAndBatchId(importTxId, batchId)
             ?: throw AppException.NotFound("Import transaction not found")
 
         importTx.jsonData = objectMapper.writeValueAsString(importTx)
         importTx.reviewStatus = ReviewStatus.NEW
         importTx.parseError = null
 
-        return importTransactionRepository.save(importTx).toReviewItem()
+        return importedTransactionRepository.save(importTx).toReviewItem()
     }
 
     @Transactional
@@ -126,7 +125,7 @@ class ImportServiceImpl(
 
         if (batch.user.id != userId) throw AppException.Forbidden("Access denied")
 
-        val importTx = importTransactionRepository.findByIdAndBatchId(importTxId, batchId)
+        val importTx = importedTransactionRepository.findByIdAndBatchId(importTxId, batchId)
             ?: throw AppException.NotFound("Import transaction not found")
 
         if (importTx.jsonData == null) {
@@ -148,12 +147,10 @@ class ImportServiceImpl(
             toAccount = if (parsed.isInflow == true) account else null,
             transactionDate = parsed.transactionDate ?: throw AppException.BadRequest("Transaction date is required"),
             description = parsed.description,
-            referenceNumber = parsed.referenceNumber,
             amount = parsed.amount ?: throw AppException.BadRequest("Amount is required"),
             currency = currency,
             isManual = false,
-            status = TransactionStatus.APPROVED,
-            importBatch = batch,
+            importedTransaction = importTx,
         )
 
         val saved = transactionRepository.save(transaction)
@@ -163,7 +160,7 @@ class ImportServiceImpl(
 
         importTx.approved = true
         importTx.reviewStatus = ReviewStatus.APPROVED
-        importTransactionRepository.save(importTx)
+        importedTransactionRepository.save(importTx)
 
         return saved.id
     }
@@ -175,11 +172,11 @@ class ImportServiceImpl(
 
         if (batch.user.id != userId) throw AppException.Forbidden("Access denied")
 
-        val importTx = importTransactionRepository.findByIdAndBatchId(importTxId, batchId)
+        val importTx = importedTransactionRepository.findByIdAndBatchId(importTxId, batchId)
             ?: throw AppException.NotFound("Import transaction not found")
 
         importTx.reviewStatus = ReviewStatus.REJECTED
-        importTransactionRepository.save(importTx)
+        importedTransactionRepository.save(importTx)
     }
 
     private fun updateAccountBalance(account: Account, amount: BigDecimal, isInflow: Boolean) {
@@ -206,7 +203,7 @@ class ImportServiceImpl(
         return false
     }
 
-    private fun ImportTransaction.toReviewItem() = ImportTransactionReviewItem(
+    private fun ImportedTransaction.toReviewItem() = ImportTransactionReviewItem(
         id = id,
         reviewStatus = reviewStatus,
         approved = approved,

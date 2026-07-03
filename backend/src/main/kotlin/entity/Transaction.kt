@@ -1,6 +1,7 @@
 package com.finance.entity
 
 import com.finance.constants.BudgetType
+import com.finance.constants.TransactionFlow
 import com.finance.constants.TransactionStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -35,30 +36,19 @@ class Transaction(
     @JoinColumn(name = "to_account_id")
     val toAccount: Account? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "transaction_type_id")
-    val transactionType: TransactionType? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    var category: Category? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "merchant_id")
-    var merchant: Merchant? = null,
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_type_id")
+    val transactionType: TransactionFlow? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "import_batch_id")
-    val importBatch: ImportBatch? = null,
+    val importedTransaction: ImportedTransaction? = null,
 
     @Column(name = "transaction_date", nullable = false)
     var transactionDate: LocalDate,
 
     @Column(name = "description", columnDefinition = "TEXT")
     var description: String? = null,
-
-    @Column(name = "reference_number", length = 100)
-    val referenceNumber: String? = null,
 
     @Column(name = "amount", nullable = false, precision = 18, scale = 2)
     val amount: BigDecimal,
@@ -80,12 +70,7 @@ class Transaction(
     val isRecurring: Boolean = false,
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    var status: TransactionStatus = TransactionStatus.PENDING_REVIEW,
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "budget_type")
     var budgetType: BudgetType? = null,
-
 
     ) : BaseEntity()

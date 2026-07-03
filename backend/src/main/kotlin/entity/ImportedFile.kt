@@ -7,12 +7,11 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
-@Table(name = "import_batches")
-class ImportBatch(
+@Table(name = "imported_file")
+class ImportedFile(
 
     @Id
     @Column(name = "id", length = 36, updatable = false, nullable = false)

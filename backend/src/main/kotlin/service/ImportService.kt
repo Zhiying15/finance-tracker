@@ -2,8 +2,6 @@ package com.finance.service
 
 import com.finance.dto.request.ImportTransactionReviewItem
 import com.finance.dto.request.ImportTransactionUpdateRequest
-import com.finance.entity.ImportBatch
-import com.finance.entity.User
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 
