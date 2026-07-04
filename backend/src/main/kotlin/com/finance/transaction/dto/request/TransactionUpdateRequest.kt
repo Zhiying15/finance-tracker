@@ -1,7 +1,7 @@
-package com.financetransaction.dto.request
+package com.finance.transaction.dto.request
 
 
-import common.constants.BudgetType
+import com.finance.common.constants.BudgetType
 import jakarta.validation.constraints.Size
 import java.time.LocalDate
 

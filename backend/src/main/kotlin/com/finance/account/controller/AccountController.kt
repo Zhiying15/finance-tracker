@@ -1,12 +1,12 @@
-package com.financeaccount.controller
+package com.finance.account.controller
 
+import com.finance.account.dto.request.AccountRequest
+import com.finance.account.dto.request.AccountUpdateRequest
+import com.finance.account.dto.response.AccountResponse
+import com.finance.account.dto.response.AccountTypeResponse
+import com.finance.account.dto.response.NetWorthResponse
 import com.finance.account.service.AccountService
-import account.dto.request.AccountRequest
-import account.dto.request.AccountUpdateRequest
-import account.dto.response.AccountResponse
-import account.dto.response.AccountTypeResponse
-import account.dto.response.NetWorthResponse
-import common.utility.SecurityUtils
+import com.finance.common.utility.SecurityUtils
 import jakarta.servlet.http.HttpSession
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus

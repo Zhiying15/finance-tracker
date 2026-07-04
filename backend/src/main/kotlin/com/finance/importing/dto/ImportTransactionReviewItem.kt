@@ -1,6 +1,6 @@
-package com.financeimporting.dto
+package com.finance.importing.dto
 
-import common.constants.ReviewStatus
+import com.finance.common.constants.ReviewStatus
 import java.math.BigDecimal
 import java.time.LocalDate
 

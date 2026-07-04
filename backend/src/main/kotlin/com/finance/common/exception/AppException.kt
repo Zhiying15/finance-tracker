@@ -1,4 +1,4 @@
-package com.financecommon.exception
+package com.finance.common.exception
 
 import org.springframework.http.HttpStatus
 

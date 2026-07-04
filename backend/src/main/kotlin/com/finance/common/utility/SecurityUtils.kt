@@ -1,7 +1,7 @@
-package com.financecommon.utility
+package com.finance.common.utility
 
-import common.constants.SessionConstant
-import common.exception.AppException
+import com.finance.common.constants.SessionConstant
+import com.finance.common.exception.AppException
 import jakarta.servlet.http.HttpSession
 import com.finance.user.security.UserPrincipal
 

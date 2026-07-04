@@ -1,6 +1,6 @@
-package com.financeentity
+package com.finance.entity
 
-import common.constants.ReviewStatus
+import com.finance.common.constants.ReviewStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType

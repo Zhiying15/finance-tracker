@@ -1,4 +1,4 @@
-package com.financeexchangerate.dto.response
+package com.finance.exchangerate.dto.response
 
 data class FrankfurterResponse(
     val base: String,

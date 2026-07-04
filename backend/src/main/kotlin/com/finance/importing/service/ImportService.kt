@@ -1,11 +1,11 @@
-package com.financeimporting.service
+package com.finance.importing.service
 
 
-import importing.dto.response.ImportFileResponse
-import importing.dto.response.ImportTransactionReviewResponse
-import entity.Account
-import importing.dto.request.ImportTransactionUpdateRequest
-import importing.dto.BulkActionResult
+import com.finance.entity.Account
+import com.finance.importing.dto.BulkActionResult
+import com.finance.importing.dto.request.ImportTransactionUpdateRequest
+import com.finance.importing.dto.response.ImportFileResponse
+import com.finance.importing.dto.response.ImportTransactionReviewResponse
 import org.springframework.web.multipart.MultipartFile
 
 interface ImportService {

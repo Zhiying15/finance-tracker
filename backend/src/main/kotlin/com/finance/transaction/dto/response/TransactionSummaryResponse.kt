@@ -1,6 +1,6 @@
-package com.financetransaction.dto.response
+package com.finance.transaction.dto.response
 
-import common.constants.BudgetType
+import com.finance.common.constants.BudgetType
 import java.math.BigDecimal
 
 data class TransactionSummaryResponse(

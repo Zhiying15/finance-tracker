@@ -1,4 +1,4 @@
-package com.financecommon.dto
+package com.finance.common.dto
 
 import java.time.LocalDateTime
 

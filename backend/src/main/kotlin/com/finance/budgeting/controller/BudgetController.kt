@@ -1,10 +1,10 @@
-package com.financebudgeting.controller
+package com.finance.budgeting.controller
 
-import budgeting.dto.request.BudgetUpsertRequest
-import budgeting.service.BudgetService
-import budgeting.dto.response.BudgetHistoryResponse
-import budgeting.dto.response.BudgetResponse
-import common.utility.SecurityUtils
+import com.finance.budgeting.dto.request.BudgetUpsertRequest
+import com.finance.budgeting.dto.response.BudgetHistoryResponse
+import com.finance.budgeting.dto.response.BudgetResponse
+import com.finance.budgeting.service.BudgetService
+import com.finance.common.utility.SecurityUtils
 import jakarta.servlet.http.HttpSession
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

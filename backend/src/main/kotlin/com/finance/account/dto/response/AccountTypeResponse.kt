@@ -1,6 +1,6 @@
-package com.financeaccount.dto.response
+package com.finance.account.dto.response
 
-import entity.AccountType
+import com.finance.entity.AccountType
 
 data class AccountTypeResponse(
     val id: Int,

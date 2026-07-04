@@ -12,28 +12,28 @@ USE finance_tracker;
 -- Lookup table — no timestamps
 -- Referenced by accounts, transactions, exchange_rates
 -- =========================
-CREATE TABLE currencies (
-                            code   VARCHAR(3)  NOT NULL,
-                            name   VARCHAR(50) NOT NULL,
-                            symbol VARCHAR(10),
+CREATE TABLE IF NOT EXISTS currencies (
+                                          code   VARCHAR(3)  NOT NULL,
+    name   VARCHAR(50) NOT NULL,
+    symbol VARCHAR(10),
 
-                            PRIMARY KEY (code)
-);
+    PRIMARY KEY (code)
+    );
 
 -- =========================
 -- USERS
 -- =========================
-CREATE TABLE users (
-                       id            CHAR(36)     NOT NULL,
-                       email         VARCHAR(255) NOT NULL,
-                       password_hash VARCHAR(255) NOT NULL,
-                       full_name     VARCHAR(100),
-                       created_at    DATETIME(6)  NOT NULL,
-                       updated_at    DATETIME(6)  NOT NULL,
+CREATE TABLE IF NOT EXISTS users (
+                                     id            CHAR(36)     NOT NULL,
+    email         VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    full_name     VARCHAR(100),
+    created_at    DATETIME(6)  NOT NULL,
+    updated_at    DATETIME(6)  NOT NULL,
 
-                       PRIMARY KEY (id),
-                       UNIQUE KEY uq_users_email (email)
-);
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_users_email (email)
+    );
 
 -- =========================
 -- ACCOUNT TYPES
@@ -41,97 +41,97 @@ CREATE TABLE users (
 -- category  : AccountCategory enum (ASSET | LIABILITY | EXTERNAL)
 -- asset_class: AssetClass enum     (BANK | CASH | BROKERAGE | ...)
 -- =========================
-CREATE TABLE account_types (
-                               id          INT          NOT NULL AUTO_INCREMENT,
-                               name        VARCHAR(50)  NOT NULL,
-                               category    VARCHAR(20)  NOT NULL,
-                               asset_class VARCHAR(20)  NOT NULL,
+CREATE TABLE IF NOT EXISTS account_types (
+                                             id          INT          NOT NULL AUTO_INCREMENT,
+                                             name        VARCHAR(50)  NOT NULL,
+    category    VARCHAR(20)  NOT NULL,
+    asset_class VARCHAR(20)  NOT NULL,
 
-                               PRIMARY KEY (id),
-                               UNIQUE KEY uq_account_types_name (name)
-);
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_account_types_name (name)
+    );
 
 -- =========================
 -- ACCOUNTS
 -- =========================
-CREATE TABLE accounts (
-                          id                   CHAR(36)      NOT NULL,
-                          user_id              CHAR(36)      NOT NULL,
-                          account_type_id      INT           NOT NULL,
-                          name                 VARCHAR(100)  NOT NULL,
-                          institution          VARCHAR(100),
-                          account_number       VARCHAR(100),
-                          currency_code        VARCHAR(3)    NOT NULL,
-                          current_balance      DECIMAL(18,2) NOT NULL DEFAULT 0.00,
-                          manual_valuation     TINYINT(1)    NOT NULL DEFAULT 0,
-                          last_valuation_date  DATE,
-                          include_in_net_worth TINYINT(1)    NOT NULL DEFAULT 1,
-                          notes                TEXT,
-                          is_active            TINYINT(1)    NOT NULL DEFAULT 1,
-                          created_at           DATETIME(6)   NOT NULL,
-                          updated_at           DATETIME(6)   NOT NULL,
+CREATE TABLE IF NOT EXISTS accounts (
+                                        id                   CHAR(36)      NOT NULL,
+    user_id              CHAR(36)      NOT NULL,
+    account_type_id      INT           NOT NULL,
+    name                 VARCHAR(100)  NOT NULL,
+    institution          VARCHAR(100),
+    account_number       VARCHAR(100),
+    currency_code        VARCHAR(3)    NOT NULL,
+    current_balance      DECIMAL(18,2) NOT NULL DEFAULT 0.00,
+    manual_valuation     TINYINT(1)    NOT NULL DEFAULT 0,
+    last_valuation_date  DATE,
+    include_in_net_worth TINYINT(1)    NOT NULL DEFAULT 1,
+    notes                TEXT,
+    is_active            TINYINT(1)    NOT NULL DEFAULT 1,
+    created_at           DATETIME(6)   NOT NULL,
+    updated_at           DATETIME(6)   NOT NULL,
 
-                          PRIMARY KEY (id),
+    PRIMARY KEY (id),
 
-                          CONSTRAINT fk_accounts_user
-                              FOREIGN KEY (user_id)         REFERENCES users(id)         ON DELETE CASCADE,
-                          CONSTRAINT fk_accounts_type
-                              FOREIGN KEY (account_type_id) REFERENCES account_types(id),
-                          CONSTRAINT fk_accounts_currency
-                              FOREIGN KEY (currency_code)   REFERENCES currencies(code),
+    CONSTRAINT fk_accounts_user
+    FOREIGN KEY (user_id)         REFERENCES users(id)         ON DELETE CASCADE,
+    CONSTRAINT fk_accounts_type
+    FOREIGN KEY (account_type_id) REFERENCES account_types(id),
+    CONSTRAINT fk_accounts_currency
+    FOREIGN KEY (currency_code)   REFERENCES currencies(code),
 
-                          INDEX idx_accounts_user        (user_id),
-                          INDEX idx_accounts_type        (account_type_id),
-                          INDEX idx_accounts_user_active (user_id, is_active)
-);
+    INDEX idx_accounts_user        (user_id),
+    INDEX idx_accounts_type        (account_type_id),
+    INDEX idx_accounts_user_active (user_id, is_active)
+    );
 
 -- =========================
 -- BUDGETS
 -- One row per user per year+month
 -- =========================
-CREATE TABLE budgets (
-                         id              CHAR(36)      NOT NULL,
-                         user_id         CHAR(36)      NOT NULL,
-                         year            INT           NOT NULL,
-                         month           INT           NOT NULL,
-                         need_percent    DECIMAL(5,2),
-                         want_percent    DECIMAL(5,2),
-                         savings_percent DECIMAL(5,2),
-                         declared_income DECIMAL(18,2),
-                         created_at      DATETIME(6)   NOT NULL,
-                         updated_at      DATETIME(6)   NOT NULL,
+CREATE TABLE IF NOT EXISTS budgets (
+                                       id              CHAR(36)      NOT NULL,
+    user_id         CHAR(36)      NOT NULL,
+    year            INT           NOT NULL,
+    month           INT           NOT NULL,
+    need_percent    DECIMAL(5,2),
+    want_percent    DECIMAL(5,2),
+    savings_percent DECIMAL(5,2),
+    declared_income DECIMAL(18,2),
+    created_at      DATETIME(6)   NOT NULL,
+    updated_at      DATETIME(6)   NOT NULL,
 
-                         PRIMARY KEY (id),
+    PRIMARY KEY (id),
 
-                         CONSTRAINT fk_budgets_user
-                             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_budgets_user
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 
-                         UNIQUE KEY uq_budget_user_month (user_id, year, month)
-);
+    UNIQUE KEY uq_budget_user_month (user_id, year, month)
+    );
 
 -- =========================
 -- IMPORTED FILES
 -- One row per uploaded file — tracks parsing lifecycle
 -- status: PROCESSING | PENDING_REVIEW | COMPLETED | FAILED
 -- =========================
-CREATE TABLE imported_file (
-                               id         CHAR(36)     NOT NULL,
-                               user_id    CHAR(36)     NOT NULL,
-                               filename   VARCHAR(255),
-                               account_id CHAR(36) NOT NULL,
-                               status     VARCHAR(50)  NOT NULL DEFAULT 'PROCESSING',
-                               created_at DATETIME(6)  NOT NULL,
-                               updated_at DATETIME(6)  NOT NULL,
+CREATE TABLE IF NOT EXISTS imported_file (
+                                             id         CHAR(36)     NOT NULL,
+    user_id    CHAR(36)     NOT NULL,
+    filename   VARCHAR(255),
+    account_id CHAR(36) NOT NULL,
+    status     VARCHAR(50)  NOT NULL DEFAULT 'PROCESSING',
+    created_at DATETIME(6)  NOT NULL,
+    updated_at DATETIME(6)  NOT NULL,
 
-                               PRIMARY KEY (id),
+    PRIMARY KEY (id),
 
-                               CONSTRAINT fk_imported_file_user
-                                   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-                               CONSTRAINT fk_imported_file_account
-                                   FOREIGN KEY (account_id) REFERENCES accounts(id),
+    CONSTRAINT fk_imported_file_user
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_imported_file_account
+    FOREIGN KEY (account_id) REFERENCES accounts(id),
 
-                               INDEX idx_imported_file_user (user_id)
-);
+    INDEX idx_imported_file_user (user_id)
+    );
 
 -- =========================
 -- IMPORTED TRANSACTIONS
@@ -139,24 +139,24 @@ CREATE TABLE imported_file (
 -- review_status: NEW | POSSIBLE_DUPLICATE | APPROVED | REJECTED
 -- approved: false until user approves → promoted to transactions
 -- =========================
-CREATE TABLE imported_transactions (
-                                       id            CHAR(36)    NOT NULL,
-                                       file_id       CHAR(36)    NOT NULL,
-                                       json_data     JSON,
-                                       parse_error   VARCHAR(500),
-                                       review_status VARCHAR(30) NOT NULL DEFAULT 'NEW',
-                                       approved      TINYINT(1)  NOT NULL DEFAULT 0,
-                                       created_at    DATETIME(6) NOT NULL,
-                                       updated_at    DATETIME(6) NOT NULL,
+CREATE TABLE IF NOT EXISTS imported_transactions (
+                                                     id            CHAR(36)    NOT NULL,
+    file_id       CHAR(36)    NOT NULL,
+    json_data     JSON,
+    parse_error   VARCHAR(500),
+    review_status VARCHAR(30) NOT NULL DEFAULT 'NEW',
+    approved      TINYINT(1)  NOT NULL DEFAULT 0,
+    created_at    DATETIME(6) NOT NULL,
+    updated_at    DATETIME(6) NOT NULL,
 
-                                       PRIMARY KEY (id),
+    PRIMARY KEY (id),
 
-                                       CONSTRAINT fk_imported_tx_file
-                                           FOREIGN KEY (file_id) REFERENCES imported_file(id) ON DELETE CASCADE,
+    CONSTRAINT fk_imported_tx_file
+    FOREIGN KEY (file_id) REFERENCES imported_file(id) ON DELETE CASCADE,
 
-                                       INDEX idx_imported_tx_file          (file_id),
-                                       INDEX idx_imported_tx_review_status (file_id, review_status)
-);
+    INDEX idx_imported_tx_file          (file_id),
+    INDEX idx_imported_tx_review_status (file_id, review_status)
+    );
 
 -- =========================
 -- TRANSACTIONS (CORE LEDGER)
@@ -167,66 +167,66 @@ CREATE TABLE imported_transactions (
 -- to_account_id    : destination account  (set for INFLOW and TRANSFER)
 -- imported_transaction_id: traceability back to staging row, null for manual entries
 -- =========================
-CREATE TABLE transactions (
-                              id                      CHAR(36)      NOT NULL,
-                              user_id                 CHAR(36)      NOT NULL,
-                              from_account_id         CHAR(36),
-                              to_account_id           CHAR(36),
-                              transaction_flow        VARCHAR(20),
-                              imported_transaction_id CHAR(36),
-                              transaction_date        DATE          NOT NULL,
-                              description             TEXT,
-                              amount                  DECIMAL(18,2) NOT NULL,
-                              currency_code           VARCHAR(3)    NOT NULL,
-                              exchange_rate           DECIMAL(18,8) NOT NULL DEFAULT 1.00000000,
-                              remarks                 TEXT,
-                              is_manual               TINYINT(1)    NOT NULL DEFAULT 0,
-                              is_recurring            TINYINT(1)    NOT NULL DEFAULT 0,
-                              budget_type             VARCHAR(20),
-                              created_at              DATETIME(6)   NOT NULL,
-                              updated_at              DATETIME(6)   NOT NULL,
+CREATE TABLE IF NOT EXISTS transactions (
+                                            id                      CHAR(36)      NOT NULL,
+    user_id                 CHAR(36)      NOT NULL,
+    from_account_id         CHAR(36),
+    to_account_id           CHAR(36),
+    transaction_flow        VARCHAR(20),
+    imported_transaction_id CHAR(36),
+    transaction_date        DATE          NOT NULL,
+    description             TEXT,
+    amount                  DECIMAL(18,2) NOT NULL,
+    currency_code           VARCHAR(3)    NOT NULL,
+    exchange_rate           DECIMAL(18,8) NOT NULL DEFAULT 1.00000000,
+    remarks                 TEXT,
+    is_manual               TINYINT(1)    NOT NULL DEFAULT 0,
+    is_recurring            TINYINT(1)    NOT NULL DEFAULT 0,
+    budget_type             VARCHAR(20),
+    created_at              DATETIME(6)   NOT NULL,
+    updated_at              DATETIME(6)   NOT NULL,
 
-                              PRIMARY KEY (id),
+    PRIMARY KEY (id),
 
-                              CONSTRAINT fk_tx_user
-                                  FOREIGN KEY (user_id)                 REFERENCES users(id)                ON DELETE CASCADE,
-                              CONSTRAINT fk_tx_from_account
-                                  FOREIGN KEY (from_account_id)         REFERENCES accounts(id),
-                              CONSTRAINT fk_tx_to_account
-                                  FOREIGN KEY (to_account_id)           REFERENCES accounts(id),
-                              CONSTRAINT fk_tx_imported
-                                  FOREIGN KEY (imported_transaction_id) REFERENCES imported_transactions(id),
-                              CONSTRAINT fk_tx_currency
-                                  FOREIGN KEY (currency_code)           REFERENCES currencies(code),
+    CONSTRAINT fk_tx_user
+    FOREIGN KEY (user_id)                 REFERENCES users(id)                ON DELETE CASCADE,
+    CONSTRAINT fk_tx_from_account
+    FOREIGN KEY (from_account_id)         REFERENCES accounts(id),
+    CONSTRAINT fk_tx_to_account
+    FOREIGN KEY (to_account_id)           REFERENCES accounts(id),
+    CONSTRAINT fk_tx_imported
+    FOREIGN KEY (imported_transaction_id) REFERENCES imported_transactions(id),
+    CONSTRAINT fk_tx_currency
+    FOREIGN KEY (currency_code)           REFERENCES currencies(code),
 
-                              INDEX idx_tx_user_date   (user_id, transaction_date),
-                              INDEX idx_tx_from        (from_account_id),
-                              INDEX idx_tx_to          (to_account_id),
-                              INDEX idx_tx_budget_type (user_id, budget_type, transaction_date)
-);
+    INDEX idx_tx_user_date   (user_id, transaction_date),
+    INDEX idx_tx_from        (from_account_id),
+    INDEX idx_tx_to          (to_account_id),
+    INDEX idx_tx_budget_type (user_id, budget_type, transaction_date)
+    );
 
 -- =========================
 -- EXCHANGE RATES
 -- Base currency: SGD (configured in application.yml)
 -- One row per base+target+date — unique constraint prevents duplicates on nightly fetch
 -- =========================
-CREATE TABLE exchange_rates (
-                                id              INT           NOT NULL AUTO_INCREMENT,
-                                base_currency   VARCHAR(3)    NOT NULL,
-                                target_currency VARCHAR(3)    NOT NULL,
-                                rate            DECIMAL(18,8) NOT NULL,
-                                rate_date       DATE          NOT NULL,
+CREATE TABLE IF NOT EXISTS exchange_rates (
+                                              id              INT           NOT NULL AUTO_INCREMENT,
+                                              base_currency   VARCHAR(3)    NOT NULL,
+    target_currency VARCHAR(3)    NOT NULL,
+    rate            DECIMAL(18,8) NOT NULL,
+    rate_date       DATE          NOT NULL,
 
-                                PRIMARY KEY (id),
+    PRIMARY KEY (id),
 
-                                CONSTRAINT fk_er_base
-                                    FOREIGN KEY (base_currency)   REFERENCES currencies(code),
-                                CONSTRAINT fk_er_target
-                                    FOREIGN KEY (target_currency) REFERENCES currencies(code),
+    CONSTRAINT fk_er_base
+    FOREIGN KEY (base_currency)   REFERENCES currencies(code),
+    CONSTRAINT fk_er_target
+    FOREIGN KEY (target_currency) REFERENCES currencies(code),
 
-                                UNIQUE KEY uq_rate_base_target_date (base_currency, target_currency, rate_date),
-                                INDEX idx_rate_lookup               (base_currency, target_currency, rate_date)
-);
+    UNIQUE KEY uq_rate_base_target_date (base_currency, target_currency, rate_date),
+    INDEX idx_rate_lookup               (base_currency, target_currency, rate_date)
+    );
 
 -- =========================
 -- DATA DICTIONARY
@@ -234,20 +234,20 @@ CREATE TABLE exchange_rates (
 -- Seeded at startup by DataDictionarySeeder
 -- Powers all UI dropdowns
 -- =========================
-CREATE TABLE data_dictionary (
-                                 id            INT          NOT NULL AUTO_INCREMENT,
-                                 group_name    VARCHAR(100) NOT NULL,
-                                 code          VARCHAR(100) NOT NULL,
-                                 label         VARCHAR(150) NOT NULL,
-                                 description   VARCHAR(255),
-                                 display_order INT          NOT NULL DEFAULT 0,
-                                 is_active     TINYINT(1)   NOT NULL DEFAULT 1,
+CREATE TABLE IF NOT EXISTS data_dictionary (
+                                               id            INT          NOT NULL AUTO_INCREMENT,
+                                               group_name    VARCHAR(100) NOT NULL,
+    code          VARCHAR(100) NOT NULL,
+    label         VARCHAR(150) NOT NULL,
+    description   VARCHAR(255),
+    display_order INT          NOT NULL DEFAULT 0,
+    is_active     TINYINT(1)   NOT NULL DEFAULT 1,
 
-                                 PRIMARY KEY (id),
+    PRIMARY KEY (id),
 
-                                 UNIQUE KEY uq_dict_group_code (group_name, code),
-                                 INDEX idx_dict_group          (group_name)
-);
+    UNIQUE KEY uq_dict_group_code (group_name, code),
+    INDEX idx_dict_group          (group_name)
+    );
 
 -- =========================
 -- SEED DATA

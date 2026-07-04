@@ -1,6 +1,6 @@
-package com.financeaccount.repository
+package com.finance.account.repository
 
-import entity.AccountType
+import com.finance.entity.AccountType
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

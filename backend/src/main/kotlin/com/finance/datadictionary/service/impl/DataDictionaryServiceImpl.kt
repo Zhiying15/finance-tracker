@@ -1,10 +1,10 @@
-package com.financedatadictionary.service.impl
+package com.finance.datadictionary.service.impl
 
-import common.exception.AppException
-import datadictionary.dto.response.DataDictionaryGroupResponse
-import datadictionary.dto.response.DataDictionaryItemResponse
-import datadictionary.repository.DataDictionaryRepository
-import datadictionary.service.DataDictionaryService
+import com.finance.common.exception.AppException
+import com.finance.datadictionary.dto.response.DataDictionaryGroupResponse
+import com.finance.datadictionary.dto.response.DataDictionaryItemResponse
+import com.finance.datadictionary.repository.DataDictionaryRepository
+import com.finance.datadictionary.service.DataDictionaryService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

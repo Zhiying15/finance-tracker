@@ -1,6 +1,6 @@
-package com.financedatadictionary.dto.response
+package com.finance.datadictionary.dto.response
 
-import entity.DataDictionary
+import com.finance.entity.DataDictionary
 
 data class DataDictionaryItemResponse(
     val code: String,

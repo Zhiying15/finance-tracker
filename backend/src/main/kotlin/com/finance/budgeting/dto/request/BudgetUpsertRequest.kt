@@ -1,4 +1,4 @@
-package com.financebudgeting.dto.request
+package com.finance.budgeting.dto.request
 
 import jakarta.validation.constraints.DecimalMax
 import jakarta.validation.constraints.DecimalMin

@@ -1,4 +1,4 @@
-package com.financeaccount.dto.request
+package com.finance.account.dto.request
 
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.Size

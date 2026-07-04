@@ -1,4 +1,4 @@
-package com.financecommon.constants
+package com.finance.common.constants
 
 object DataDictionaryConstants {
     const val TRANSACTION_STATUS  = "TRANSACTION_STATUS"

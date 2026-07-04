@@ -1,2 +1,0 @@
-USE finance_tracker;
-

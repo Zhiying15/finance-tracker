@@ -1,8 +1,8 @@
-package com.financeexchangerate.controller
+package com.finance.exchangerate.controller
 
-import common.utility.SecurityUtils
-import exchangerate.dto.response.ExchangeRateResponse
-import exchangerate.service.impl.ExchangeRateServiceImpl
+import com.finance.common.utility.SecurityUtils
+import com.finance.exchangerate.dto.response.ExchangeRateResponse
+import com.finance.exchangerate.service.impl.ExchangeRateServiceImpl
 import jakarta.servlet.http.HttpSession
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

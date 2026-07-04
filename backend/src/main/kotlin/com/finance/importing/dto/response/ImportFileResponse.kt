@@ -1,4 +1,4 @@
-package com.financeimporting.dto.response
+package com.finance.importing.dto.response
 
 import java.time.LocalDateTime
 

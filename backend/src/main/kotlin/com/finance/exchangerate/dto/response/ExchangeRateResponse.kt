@@ -1,6 +1,6 @@
-package com.financeexchangerate.dto.response
+package com.finance.exchangerate.dto.response
 
-import entity.ExchangeRate
+import com.finance.entity.ExchangeRate
 import java.math.BigDecimal
 import java.time.LocalDate
 

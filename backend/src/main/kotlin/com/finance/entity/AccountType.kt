@@ -1,7 +1,7 @@
-package com.financeentity
+package com.finance.entity
 
-import common.constants.AccountCategory
-import common.constants.AssetClass
+import com.finance.common.constants.AccountCategory
+import com.finance.common.constants.AssetClass
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -29,4 +29,4 @@ class AccountType(
     @Enumerated(EnumType.STRING)
     @Column(name = "asset_class", nullable = false)
     val assetClass: AssetClass,
-) : BaseEntity()
+)

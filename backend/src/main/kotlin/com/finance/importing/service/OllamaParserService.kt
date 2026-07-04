@@ -1,6 +1,6 @@
-package com.financeimporting.service
+package com.finance.importing.service
 
-import importing.dto.OllamaParseResult
+import com.finance.importing.dto.OllamaParseResult
 import org.springframework.stereotype.Service
 
 @Service

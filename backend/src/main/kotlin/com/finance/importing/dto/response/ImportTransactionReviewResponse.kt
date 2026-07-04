@@ -1,8 +1,8 @@
-package com.financeimporting.dto.response
+package com.finance.importing.dto.response
 
-import common.constants.ReviewStatus
-import importing.dto.ParsedTransactionFields
-import entity.ImportedTransaction
+import com.finance.common.constants.ReviewStatus
+import com.finance.entity.ImportedTransaction
+import com.finance.importing.dto.ParsedTransactionFields
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalDateTime

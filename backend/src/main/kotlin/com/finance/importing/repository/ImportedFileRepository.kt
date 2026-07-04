@@ -1,6 +1,6 @@
-package com.financeimporting.repository
+package com.finance.importing.repository
 
-import entity.ImportedFile
+import com.finance.entity.ImportedFile
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

@@ -1,7 +1,7 @@
-package com.financetransaction.dto.request
+package com.finance.transaction.dto.request
 
-import common.constants.BudgetType
-import common.constants.TransactionFlow
+import com.finance.common.constants.BudgetType
+import com.finance.common.constants.TransactionFlow
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size

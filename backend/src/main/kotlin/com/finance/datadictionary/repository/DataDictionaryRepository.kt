@@ -1,6 +1,6 @@
-package com.financedatadictionary.repository
+package com.finance.datadictionary.repository
 
-import entity.DataDictionary
+import com.finance.entity.DataDictionary
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

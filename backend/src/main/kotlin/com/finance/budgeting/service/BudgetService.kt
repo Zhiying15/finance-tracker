@@ -1,8 +1,8 @@
-package com.financebudgeting.service
+package com.finance.budgeting.service
 
-import budgeting.dto.request.BudgetUpsertRequest
-import budgeting.dto.response.BudgetHistoryResponse
-import budgeting.dto.response.BudgetResponse
+import com.finance.budgeting.dto.request.BudgetUpsertRequest
+import com.finance.budgeting.dto.response.BudgetHistoryResponse
+import com.finance.budgeting.dto.response.BudgetResponse
 
 interface BudgetService {
     fun upsertBudget(userId: String, request: BudgetUpsertRequest): BudgetResponse

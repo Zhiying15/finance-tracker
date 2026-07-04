@@ -1,7 +1,7 @@
-package com.financebudgeting.dto.response
+package com.finance.budgeting.dto.response
 
-import common.constants.BudgetType
-import entity.Budget
+import com.finance.common.constants.BudgetType
+import com.finance.entity.Budget
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -97,7 +97,8 @@ data class BudgetResponse(
             summary = MonthlySummary(
                 actualIncome = BigDecimal.ZERO,
                 forecastedIncome = BigDecimal.ZERO,
-                need = BudgetLine(BudgetType.NEED, BigDecimal.ZERO, null,
+                need = BudgetLine(
+                    BudgetType.NEED, BigDecimal.ZERO, null,
                     BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, null),
                 want = BudgetLine(BudgetType.WANT, BigDecimal.ZERO, null,
                     BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, null),

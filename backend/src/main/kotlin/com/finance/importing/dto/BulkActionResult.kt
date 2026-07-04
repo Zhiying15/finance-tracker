@@ -1,4 +1,4 @@
-package com.financeimporting.dto
+package com.finance.importing.dto
 
 data class BulkActionResult(
     val approved: Int,

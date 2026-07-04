@@ -1,6 +1,6 @@
-package com.financeexchangerate.client
+package com.finance.exchangerate.client
 
-import exchangerate.dto.response.FrankfurterResponse
+import com.finance.exchangerate.dto.response.FrankfurterResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam

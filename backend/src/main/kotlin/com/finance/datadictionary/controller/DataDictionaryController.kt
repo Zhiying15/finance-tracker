@@ -1,7 +1,7 @@
-package com.financedatadictionary.controller
+package com.finance.datadictionary.controller
 
-import datadictionary.dto.response.DataDictionaryGroupResponse
-import datadictionary.service.DataDictionaryService
+import com.finance.datadictionary.dto.response.DataDictionaryGroupResponse
+import com.finance.datadictionary.service.DataDictionaryService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 

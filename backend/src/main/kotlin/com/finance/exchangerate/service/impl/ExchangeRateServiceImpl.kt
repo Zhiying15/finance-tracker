@@ -1,12 +1,12 @@
-package com.financeexchangerate.service.impl
+package com.finance.exchangerate.service.impl
 
-import common.exception.AppException
-import entity.Currency
-import entity.ExchangeRate
-import exchangerate.client.FrankfurterClient
-import exchangerate.dto.response.ExchangeRateResponse
-import exchangerate.dto.response.FrankfurterResponse
-import exchangerate.repository.ExchangeRateRepository
+import com.finance.common.exception.AppException
+import com.finance.entity.Currency
+import com.finance.entity.ExchangeRate
+import com.finance.exchangerate.client.FrankfurterClient
+import com.finance.exchangerate.dto.response.ExchangeRateResponse
+import com.finance.exchangerate.dto.response.FrankfurterResponse
+import com.finance.exchangerate.repository.ExchangeRateRepository
 import jakarta.persistence.EntityManager
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
@@ -70,10 +70,10 @@ class ExchangeRateServiceImpl(
 
             runCatching {
                 ExchangeRate(
-                    baseCurrency   = baseCurrencyRef,
+                    baseCurrency = baseCurrencyRef,
                     targetCurrency = currencyRef(targetCode),
-                    rate           = BigDecimal(rate.toString()),
-                    rateDate       = today,
+                    rate = BigDecimal(rate.toString()),
+                    rateDate = today,
                 )
             }.onFailure {
                 log.warn("Skipping unknown currency: $targetCode — ${it.message}")

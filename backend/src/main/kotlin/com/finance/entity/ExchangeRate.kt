@@ -1,4 +1,4 @@
-package com.financeentity
+package com.finance.entity
 
 import jakarta.persistence.*
 import java.math.BigDecimal

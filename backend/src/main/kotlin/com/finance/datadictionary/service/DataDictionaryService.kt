@@ -1,6 +1,6 @@
-package com.financedatadictionary.service
+package com.finance.datadictionary.service
 
-import datadictionary.dto.response.DataDictionaryGroupResponse
+import com.finance.datadictionary.dto.response.DataDictionaryGroupResponse
 
 interface DataDictionaryService {
     fun getAllGroups(): List<DataDictionaryGroupResponse>

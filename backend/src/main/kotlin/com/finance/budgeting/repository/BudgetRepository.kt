@@ -1,6 +1,6 @@
-package com.financebudgeting.repository
+package com.finance.budgeting.repository
 
-import entity.Budget
+import com.finance.entity.Budget
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query

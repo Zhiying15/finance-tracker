@@ -1,8 +1,8 @@
-package com.financetransaction.repository
+package com.finance.transaction.repository
 
-import common.constants.BudgetType
-import entity.Currency
-import entity.Transaction
+import com.finance.common.constants.BudgetType
+import com.finance.entity.Currency
+import com.finance.entity.Transaction
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

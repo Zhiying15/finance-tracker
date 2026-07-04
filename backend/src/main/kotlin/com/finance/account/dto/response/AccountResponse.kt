@@ -1,6 +1,6 @@
-package com.financeaccount.dto.response
+package com.finance.account.dto.response
 
-import entity.Account
+import com.finance.entity.Account
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalDateTime

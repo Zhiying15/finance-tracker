@@ -1,4 +1,4 @@
-package com.financeuser.dto.request
+package com.finance.user.dto.request
 
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank

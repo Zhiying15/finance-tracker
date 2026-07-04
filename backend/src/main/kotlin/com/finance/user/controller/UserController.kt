@@ -1,13 +1,13 @@
-package com.financeuser.controller
+package com.finance.user.controller
 
-import common.constants.APIConstant
-import user.dto.request.SignInRequest
+import com.finance.common.constants.APIConstant
+import com.finance.common.constants.SessionConstant
+import com.finance.common.exception.AppException
+import com.finance.user.dto.request.SignInRequest
 import com.finance.user.dto.request.UserRequest
-import common.exception.AppException
 import com.finance.user.dto.response.UserResponse
 import com.finance.user.security.UserPrincipal
 import com.finance.user.service.AuthService
-import common.constants.SessionConstant
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpSession
 import jakarta.validation.Valid

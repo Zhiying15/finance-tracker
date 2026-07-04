@@ -1,4 +1,4 @@
-package com.financeimporting.dto
+package com.finance.importing.dto
 
 import java.math.BigDecimal
 import java.time.LocalDate

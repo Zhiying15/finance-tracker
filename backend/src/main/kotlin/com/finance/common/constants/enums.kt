@@ -1,4 +1,4 @@
-package com.financecommon.constants
+package com.finance.common.constants
 
 enum class TransactionStatus { PENDING_REVIEW, APPROVED, REJECTED, VOID }
 

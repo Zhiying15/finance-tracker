@@ -4,95 +4,91 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="refactoring code into domain specific folder">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/client/FrankfurterClient.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/dto/response/FrankfurterResponse.kt" afterDir="false" />
+    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="refactoring package path">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/FinanceTrackerApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/FinanceTrackerApplication.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/controller/AccountController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/controller/AccountController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/dto/request/AccountRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/request/AccountRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/dto/request/AccountUpdateRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/request/AccountUpdateRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/dto/response/AccountResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/AccountResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/dto/response/AccountTypeResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/AccountTypeResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/dto/response/NetWorthResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/NetWorthResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/repository/AccountRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/repository/AccountRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/repository/AccountTypeRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/repository/AccountTypeRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/service/AccountService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/service/AccountService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/account/service/impl/AccountServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/service/impl/AccountServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/budgeting/controller/BudgetController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/controller/BudgetController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/budgeting/dto/request/BudgetUpsertRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/request/BudgetUpsertRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/budgeting/dto/response/BudgetHistoryResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/response/BudgetHistoryResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/budgeting/dto/response/BudgetResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/response/BudgetResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/budgeting/repository/BudgetRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/repository/BudgetRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/budgeting/service/BudgetService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/service/BudgetService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/budgeting/service/impl/BudgetServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/service/impl/BudgetServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/config/AsyncConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/config/AsyncConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/config/RedisConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/config/RedisConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/config/WebClientConfig.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/constants/APIConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/APIConstant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/constants/DataDictionaryConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/DataDictionaryConstants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/constants/SessionConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/SessionConstant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/constants/enums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/enums.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/dto/ErrorResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/dto/ErrorResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/exception/AppException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/exception/AppException.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/exception/GlobalExceptionHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/exception/GlobalExceptionHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/common/utility/SecurityUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/utility/SecurityUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/datadictionary/controller/DataDictionaryController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/controller/DataDictionaryController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/datadictionary/dto/response/DataDictionaryResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/dto/response/DataDictionaryResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/datadictionary/repository/DataDictionaryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/repository/DataDictionaryRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/datadictionary/seeder/DataDictionarySeeder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/seeder/DataDictionarySeeder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/datadictionary/service/DataDictionaryService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/service/DataDictionaryService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/datadictionary/service/impl/DataDictionaryServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/service/impl/DataDictionaryServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/AccountType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/AccountType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/BaseEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/BaseEntity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Budget.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Budget.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Currency.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Currency.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/DataDictionary.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/DataDictionary.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ExchangeRate.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ExchangeRate.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportedFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ImportedFile.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/ImportedTransaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ImportedTransaction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/Transaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Transaction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/entity/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/exchangerate/controller/ExchangeRateController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/controller/ExchangeRateController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/exchangerate/dto/response/ExchangeRateResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/dto/response/ExchangeRateResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/exchangerate/repository/ExchangeRateRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/repository/ExchangeRateRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/exchangerate/service/impl/ExchangeRateServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/service/impl/ExchangeRateServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/controller/ImportController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/controller/ImportController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/dto/BulkActionResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/BulkActionResult.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/dto/ImportTransactionReviewItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/ImportTransactionReviewItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/dto/OllamaParseResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/OllamaParseResult.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/dto/ParsedTransactionFields.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/ParsedTransactionFields.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/dto/request/ImportTransactionUpdateRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/request/ImportTransactionUpdateRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/dto/response/ImportFileResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/response/ImportFileResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/dto/response/ImportTransactionReviewResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/response/ImportTransactionReviewResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/repository/ImportedFileRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedFileRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/repository/ImportedTransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedTransactionRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/service/ImportService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/ImportService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/service/OllamaParserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/OllamaParserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/service/impl/ImportServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/impl/ImportServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/importing/service/impl/OllamaParserServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/impl/OllamaParserServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/controller/TransactionController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/controller/TransactionController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/dto/request/TransactionRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/request/TransactionRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/dto/request/TransactionUpdateRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/request/TransactionUpdateRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/dto/response/TransactionResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/response/TransactionResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/dto/response/TransactionSummaryResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/response/TransactionSummaryResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/repository/TransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/repository/TransactionRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/service/TransactionService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/service/TransactionService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/transaction/service/impl/TransactionServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/service/impl/TransactionServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/config/SecurityConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/controller/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/controller/UserController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/dto/request/SignInRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/dto/request/SignInRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/dto/request/UserRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/dto/request/UserRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/dto/response/UserResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/dto/response/UserResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/repository/UserRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/security/UserPrincipal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/security/UserPrincipal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/service/AuthService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/AuthService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/service/impl/AuthServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/AuthServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/user/service/impl/UserDetailsServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/UserDetailsServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/controller/AccountController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/controller/AccountController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/request/AccountRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/request/AccountRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/request/AccountUpdateRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/request/AccountUpdateRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/AccountResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/AccountResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/AccountTypeResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/AccountTypeResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/NetWorthResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/dto/response/NetWorthResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/repository/AccountRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/repository/AccountRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/repository/AccountTypeRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/repository/AccountTypeRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/service/AccountService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/service/AccountService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/service/impl/AccountServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/account/service/impl/AccountServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/controller/BudgetController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/controller/BudgetController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/request/BudgetUpsertRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/request/BudgetUpsertRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/response/BudgetHistoryResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/response/BudgetHistoryResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/response/BudgetResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/dto/response/BudgetResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/repository/BudgetRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/repository/BudgetRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/service/BudgetService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/service/BudgetService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/service/impl/BudgetServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/budgeting/service/impl/BudgetServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/config/AsyncConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/config/AsyncConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/config/RedisConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/config/RedisConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/APIConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/APIConstant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/DataDictionaryConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/DataDictionaryConstants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/SessionConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/SessionConstant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/enums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/enums.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/dto/ErrorResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/dto/ErrorResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/exception/AppException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/exception/AppException.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/exception/GlobalExceptionHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/exception/GlobalExceptionHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/utility/SecurityUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/utility/SecurityUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/controller/DataDictionaryController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/controller/DataDictionaryController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/dto/response/DataDictionaryResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/dto/response/DataDictionaryResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/repository/DataDictionaryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/repository/DataDictionaryRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/seeder/DataDictionarySeeder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/seeder/DataDictionarySeeder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/service/DataDictionaryService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/service/DataDictionaryService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/service/impl/DataDictionaryServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/datadictionary/service/impl/DataDictionaryServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/AccountType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/AccountType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/BaseEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/BaseEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Budget.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Budget.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Currency.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Currency.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/DataDictionary.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/DataDictionary.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ExchangeRate.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ExchangeRate.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ImportedFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ImportedFile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ImportedTransaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/ImportedTransaction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Transaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/Transaction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/client/FrankfurterClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/client/FrankfurterClient.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/controller/ExchangeRateController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/controller/ExchangeRateController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/dto/response/ExchangeRateResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/dto/response/ExchangeRateResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/dto/response/FrankfurterResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/dto/response/FrankfurterResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/repository/ExchangeRateRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/repository/ExchangeRateRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/service/impl/ExchangeRateServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/exchangerate/service/impl/ExchangeRateServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/controller/ImportController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/controller/ImportController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/BulkActionResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/BulkActionResult.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/ImportTransactionReviewItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/ImportTransactionReviewItem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/OllamaParseResult.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/OllamaParseResult.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/ParsedTransactionFields.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/ParsedTransactionFields.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/request/ImportTransactionUpdateRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/request/ImportTransactionUpdateRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/response/ImportFileResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/response/ImportFileResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/response/ImportTransactionReviewResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/dto/response/ImportTransactionReviewResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedFileRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedFileRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedTransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedTransactionRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/ImportService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/ImportService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/OllamaParserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/OllamaParserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/impl/ImportServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/impl/ImportServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/impl/OllamaParserServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/service/impl/OllamaParserServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/controller/TransactionController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/controller/TransactionController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/request/TransactionRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/request/TransactionRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/request/TransactionUpdateRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/request/TransactionUpdateRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/response/TransactionResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/response/TransactionResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/response/TransactionSummaryResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/dto/response/TransactionSummaryResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/repository/TransactionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/repository/TransactionRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/service/TransactionService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/service/TransactionService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/service/impl/TransactionServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/transaction/service/impl/TransactionServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/config/SecurityConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/controller/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/controller/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/dto/request/SignInRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/dto/request/SignInRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/repository/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/AuthService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/AuthService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/AuthServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/AuthServiceImpl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V1__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V2__seed_data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V3__sample_data.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +190,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "Spring Boot.FinanceTrackerApplication (1).executor": "Debug",
-    "Spring Boot.FinanceTrackerApplication.executor": "Run",
+    "Spring Boot.FinanceTrackerApplication.executor": "Debug",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "feature/init",
     "kotlin-language-version-configured": "true",
@@ -227,6 +223,10 @@
   </component>
   <component name="RunManager">
     <configuration name="FinanceTrackerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="DB_PASSWORD" value="Ixora0315*" />
+        <env name="DB_USERNAME" value="root" />
+      </envs>
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
       <module name="finance-tracker.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.finance.FinanceTrackerApplication" />
@@ -374,7 +374,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783164957409</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="refactoring package path">
+      <option name="closed" value="true" />
+      <created>1783173251781</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1783173251781</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +414,8 @@
     <MESSAGE value="Fixing errors to complie code" />
     <MESSAGE value="cleaning up code in progress..." />
     <MESSAGE value="refactoring code into domain specific folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring code into domain specific folder" />
+    <MESSAGE value="refactoring package path" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring package path" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -419,7 +428,7 @@
         <line-breakpoint enabled="true" type="kotlin-function">
           <url>file://$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedTransactionRepository.kt</url>
           <line>14</line>
-          <properties class="importing.repository.ImportedTransactionRepository">
+          <properties class="com.finance.importing.repository.ImportedTransactionRepository">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

@@ -1,8 +1,8 @@
-package com.financetransaction.dto.response
+package com.finance.transaction.dto.response
 
-import common.constants.BudgetType
-import common.constants.TransactionFlow
-import entity.Transaction
+import com.finance.common.constants.BudgetType
+import com.finance.common.constants.TransactionFlow
+import com.finance.entity.Transaction
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDate

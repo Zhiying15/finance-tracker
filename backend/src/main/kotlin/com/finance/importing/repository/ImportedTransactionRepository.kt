@@ -1,7 +1,7 @@
-package com.financeimporting.repository
+package com.finance.importing.repository
 
-import common.constants.ReviewStatus
-import entity.ImportedTransaction
+import com.finance.common.constants.ReviewStatus
+import com.finance.entity.ImportedTransaction
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

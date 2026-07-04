@@ -1,7 +1,7 @@
-package com.financeentity
+package com.finance.entity
 
-import common.constants.BudgetType
-import common.constants.TransactionFlow
+import com.finance.common.constants.BudgetType
+import com.finance.common.constants.TransactionFlow
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDate

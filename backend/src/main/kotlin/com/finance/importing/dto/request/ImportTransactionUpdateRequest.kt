@@ -1,6 +1,6 @@
-package com.financeimporting.dto.request
+package com.finance.importing.dto.request
 
-import common.constants.BudgetType
+import com.finance.common.constants.BudgetType
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size

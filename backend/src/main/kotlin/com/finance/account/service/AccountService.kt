@@ -1,11 +1,11 @@
 package com.finance.account.service
 
-import account.dto.request.AccountRequest
-import account.dto.request.AccountUpdateRequest
-import account.dto.response.AccountResponse
-import account.dto.response.AccountTypeResponse
-import account.dto.response.NetWorthResponse
-import entity.Account
+import com.finance.account.dto.request.AccountRequest
+import com.finance.account.dto.request.AccountUpdateRequest
+import com.finance.account.dto.response.AccountResponse
+import com.finance.account.dto.response.AccountTypeResponse
+import com.finance.account.dto.response.NetWorthResponse
+import com.finance.entity.Account
 import org.springframework.stereotype.Service
 
 @Service

@@ -1,32 +1,32 @@
-package com.financeimporting.service.impl
+package com.finance.importing.service.impl
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import common.constants.ReviewStatus
-import common.constants.TransactionFlow
-import importing.dto.OllamaParseResult
-import importing.dto.ParsedTransactionFields
-import importing.dto.response.ImportFileResponse
-import importing.dto.response.ImportTransactionReviewResponse
-import entity.Account
-import entity.ImportedFile
-import entity.ImportedTransaction
-import entity.Transaction
-import common.exception.AppException
-import account.repository.AccountRepository
+import com.finance.account.repository.AccountRepository
 import com.finance.account.service.AccountService
-import importing.repository.ImportedFileRepository
-import importing.repository.ImportedTransactionRepository
-import importing.service.ImportService
-import importing.service.OllamaParserService
-import importing.dto.BulkActionResult
-import importing.dto.request.ImportTransactionUpdateRequest
+import com.finance.common.constants.ReviewStatus
+import com.finance.common.constants.TransactionFlow
+import com.finance.common.exception.AppException
+import com.finance.entity.Account
+import com.finance.entity.ImportedFile
+import com.finance.entity.ImportedTransaction
+import com.finance.entity.Transaction
+import com.finance.importing.dto.BulkActionResult
+import com.finance.importing.dto.OllamaParseResult
+import com.finance.importing.dto.ParsedTransactionFields
+import com.finance.importing.dto.request.ImportTransactionUpdateRequest
+import com.finance.importing.dto.response.ImportFileResponse
+import com.finance.importing.dto.response.ImportTransactionReviewResponse
+import com.finance.importing.repository.ImportedFileRepository
+import com.finance.importing.repository.ImportedTransactionRepository
+import com.finance.importing.service.ImportService
+import com.finance.importing.service.OllamaParserService
+import com.finance.transaction.repository.TransactionRepository
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
-import transaction.repository.TransactionRepository
 import com.finance.user.repository.UserRepository
 import java.math.BigDecimal
 import java.nio.charset.StandardCharsets
@@ -62,10 +62,10 @@ class ImportServiceImpl(
             .orElseThrow { AppException.NotFound("User not found") }
 
         val importedFile = ImportedFile(
-            user     = user,
-            account  = account,    // ← add this
+            user = user,
+            account = account,    // ← add this
             filename = file.originalFilename,
-            status   = "PROCESSING",
+            status = "PROCESSING",
         )
         val savedFile = importedFileRepository.save(importedFile)
 
@@ -132,8 +132,8 @@ class ImportServiceImpl(
                     log.error("Row $index parse error in file $fileId: ${ex.message}")
                     importedTransactionRepository.save(
                         ImportedTransaction(
-                            file       = importedFile,
-                            jsonData   = null,
+                            file = importedFile,
+                            jsonData = null,
                             parseError = "System error: ${ex.message?.take(400)}",
                         )
                     )

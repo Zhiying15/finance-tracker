@@ -1,10 +1,10 @@
-package com.financeimporting.service.impl
+package com.finance.importing.service.impl
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import importing.dto.OllamaParseResult
-import importing.dto.ParsedTransactionFields
-import importing.service.OllamaParserService
+import com.finance.importing.dto.OllamaParseResult
+import com.finance.importing.dto.ParsedTransactionFields
+import com.finance.importing.service.OllamaParserService
 import org.slf4j.LoggerFactory
 import org.springframework.ai.chat.messages.SystemMessage
 import org.springframework.ai.chat.messages.UserMessage

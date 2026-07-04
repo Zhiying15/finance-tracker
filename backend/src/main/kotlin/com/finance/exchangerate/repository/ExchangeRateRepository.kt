@@ -1,7 +1,7 @@
-package com.financeexchangerate.repository
+package com.finance.exchangerate.repository
 
-import entity.Currency
-import entity.ExchangeRate
+import com.finance.entity.Currency
+import com.finance.entity.ExchangeRate
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

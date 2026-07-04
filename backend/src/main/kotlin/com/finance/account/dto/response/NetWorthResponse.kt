@@ -1,4 +1,4 @@
-package com.financeaccount.dto.response
+package com.finance.account.dto.response
 
 import java.math.BigDecimal
 

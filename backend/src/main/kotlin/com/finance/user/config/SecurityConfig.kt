@@ -1,8 +1,8 @@
-package com.financeuser.config
+package com.finance.user.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.finance.common.dto.ErrorResponse
 import com.finance.user.service.impl.UserDetailsServiceImpl
-import common.dto.ErrorResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.context.annotation.Bean

@@ -1,7 +1,7 @@
-package com.financedatadictionary.seeder
+package com.finance.datadictionary.seeder
 
-import datadictionary.repository.DataDictionaryRepository
-import entity.DataDictionary
+import com.finance.datadictionary.repository.DataDictionaryRepository
+import com.finance.entity.DataDictionary
 import org.slf4j.LoggerFactory
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner

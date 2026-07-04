@@ -1,9 +1,9 @@
-package com.financetransaction.service
+package com.finance.transaction.service
 
-import transaction.dto.request.TransactionRequest
-import transaction.dto.request.TransactionUpdateRequest
-import transaction.dto.response.TransactionResponse
-import transaction.dto.response.TransactionSummaryResponse
+import com.finance.transaction.dto.request.TransactionRequest
+import com.finance.transaction.dto.request.TransactionUpdateRequest
+import com.finance.transaction.dto.response.TransactionResponse
+import com.finance.transaction.dto.response.TransactionSummaryResponse
 import org.springframework.stereotype.Service
 
 @Service
