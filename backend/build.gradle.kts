@@ -19,10 +19,8 @@ java {
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://spring.io") }
 }
 
-// FIX 2: Define BOM versions for Spring Cloud
 val springCloudVersion = "2025.0.3"
 
 dependencyManagement {
@@ -49,26 +47,31 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     implementation("io.hypersistence:hypersistence-utils-hibernate-63:3.15.3")
 
-    // --- Kotlin ---
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-    // DB migrations
+    // --- DB Migrations ---
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-mysql")
 
-    // HTTP client
-    // FIX 3: Version managed by Spring Cloud BOM
+    // --- HTTP Client (Frankfurter + any external API calls) ---
+    // Feign replaces WebClient — no webflux needed
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    // FIX 4: Explicit version added as it is not always managed by the core BOM
     implementation("io.github.openfeign:feign-okhttp:13.5")
 
-    // Ollama (AI) integration
-    implementation("org.springframework.ai:spring-ai-ollama")
+    // ✅ Remove spring-boot-starter-webflux entirely — conflicts with openfeign
+    // via ReactiveObservationConfiguration bean name clash in Spring Boot 3.5.0
+
+    // ✅ Remove r2dbc-spi — no longer needed once webflux is removed
+
+    // --- Spring AI Ollama ---
+    // spring-ai-starter-model-ollama already includes spring-ai-ollama transitively
+    // Remove the duplicate spring-ai-ollama direct dependency
     implementation("org.springframework.ai:spring-ai-starter-model-ollama")
 
-    // PDF parsing
+    // --- PDF Parsing ---
     implementation("org.apache.pdfbox:pdfbox:2.0.30")
+
+    // --- Kotlin ---
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // --- Testing ---
     testImplementation("org.springframework.boot:spring-boot-starter-test")
