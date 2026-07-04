@@ -1,4 +1,4 @@
-package com.finance.entity
+package entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

@@ -1,4 +1,4 @@
-package com.finance.entity
+package entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -24,7 +24,11 @@ class ImportedFile(
     @Column(name = "filename", length = 255)
     val filename: String? = null,
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    val account: Account,
+
     @Column(name = "status", length = 50)
     var status: String = "PROCESSING",
 
-) : BaseEntity()
+    ) : BaseEntity()

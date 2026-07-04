@@ -1,4 +1,4 @@
-package com.finance.entity
+package entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -9,7 +9,6 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.math.BigDecimal
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
@@ -29,13 +28,13 @@ class Account(
     val accountType: AccountType,
 
     @Column(name = "name", nullable = false, length = 100)
-    val name: String,
+    var name: String,
 
     @Column(name = "institution", length = 100)
-    val institution: String? = null,
+    var institution: String? = null,
 
     @Column(name = "account_number", length = 100)
-    val accountNumber: String? = null,
+    var accountNumber: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_code", nullable = false)
@@ -48,13 +47,13 @@ class Account(
     val manualValuation: Boolean = false,
 
     @Column(name = "last_valuation_date")
-    val lastValuationDate: LocalDate? = null,
+    var lastValuationDate: LocalDate? = null,
 
     @Column(name = "include_in_net_worth")
-    val includeInNetWorth: Boolean = true,
+    var includeInNetWorth: Boolean = true,
 
     @Column(name = "notes", columnDefinition = "TEXT")
-    val notes: String? = null,
+    var notes: String? = null,
 
     @Column(name = "is_active")
     var isActive: Boolean = true

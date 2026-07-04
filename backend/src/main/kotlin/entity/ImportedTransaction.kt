@@ -1,6 +1,6 @@
-package com.finance.entity;
+package entity
 
-import com.finance.constants.ReviewStatus
+import common.constants.ReviewStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -21,7 +21,7 @@ class ImportedTransaction(
     val id: String = UUID.randomUUID().toString(),
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "batch_id", nullable = false)
+    @JoinColumn(name = "file_id", nullable = false)
     val file: ImportedFile,
 
     @Column(name = "json_data", columnDefinition = "JSON")

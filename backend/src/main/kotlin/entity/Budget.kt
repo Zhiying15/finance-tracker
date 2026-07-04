@@ -1,4 +1,4 @@
-package com.finance.entity
+package entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -46,4 +46,4 @@ class Budget(
     @Column(name = "declared_income", precision = 18, scale = 2)
     var declaredIncome: BigDecimal? = null,
 
-) : BaseEntity()
+    ) : BaseEntity()

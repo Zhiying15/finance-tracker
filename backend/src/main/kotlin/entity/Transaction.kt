@@ -1,17 +1,8 @@
-package com.finance.entity
+package entity
 
-import com.finance.constants.BudgetType
-import com.finance.constants.TransactionFlow
-import com.finance.constants.TransactionStatus
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.FetchType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.Table
+import common.constants.BudgetType
+import common.constants.TransactionFlow
+import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.UUID
@@ -37,11 +28,11 @@ class Transaction(
     val toAccount: Account? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "transaction_type_id")
-    val transactionType: TransactionFlow? = null,
+    @Column(name = "transaction_flow")
+    val transactionFlow: TransactionFlow? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "import_batch_id")
+    @JoinColumn(name = "imported_transaction_id")
     val importedTransaction: ImportedTransaction? = null,
 
     @Column(name = "transaction_date", nullable = false)
@@ -67,7 +58,7 @@ class Transaction(
     val isManual: Boolean = false,
 
     @Column(name = "is_recurring")
-    val isRecurring: Boolean = false,
+    var isRecurring: Boolean = false,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "budget_type")
