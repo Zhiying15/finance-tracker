@@ -11,13 +11,14 @@ class DataDictionaryController(
     private val service: DataDictionaryService,
 ) {
     // GET /api/data-dictionary
-    // Returns all groups — useful for prefetching everything on app init
+    // Prefetch all groups in one call — use on app init to populate all dropdowns
     @GetMapping
     fun getAllGroups(): ResponseEntity<List<DataDictionaryGroupResponse>> =
         ResponseEntity.ok(service.getAllGroups())
 
-    // GET /api/data-dictionary/BUDGET_TYPE
-    // Returns one group — use this for individual dropdowns
+    // GET /api/data-dictionary/{group}
+    // Single group — use for lazy-loaded individual dropdowns
+    // e.g. GET /api/data-dictionary/BUDGET_TYPE
     @GetMapping("/{group}")
     fun getGroup(
         @PathVariable group: String,

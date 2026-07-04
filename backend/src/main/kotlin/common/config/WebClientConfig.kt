@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient
 @Configuration
 class WebClientConfig {
 
-    @Bean
+    @Bean("frankfurterWebClient")
     fun frankfurterWebClient(
         @Value("\${app.exchange-rate.frankfurter-url}") baseUrl: String,
     ): WebClient = WebClient.builder()

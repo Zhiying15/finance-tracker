@@ -41,6 +41,8 @@ class SecurityConfig(
             .authorizeHttpRequests { auth ->
                 auth
                     .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
+                    // Data dictionary is public — no session needed to render dropdowns
+                    .requestMatchers(HttpMethod.GET, "/data-dictionary", "/data-dictionary/**").permitAll()
                     .anyRequest().authenticated()
             }
             .sessionManagement { session ->

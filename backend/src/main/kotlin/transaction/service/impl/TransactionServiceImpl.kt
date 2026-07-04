@@ -316,7 +316,7 @@ class TransactionServiceImpl(
             toAssetClass == AssetClass.CREDIT_CARD -> BudgetType.EXCLUDED
 
             // Investment / retirement top-up → savings
-            toAssetClass contains listOf(
+            toAssetClass in listOf(
                 AssetClass.BROKERAGE,
                 AssetClass.CPF,
                 AssetClass.CRYPTO,
