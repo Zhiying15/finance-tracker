@@ -1,18 +1,18 @@
-import type { BudgetBucket, TransactionFlow } from "@type/index";
+import type { BudgetType, TransactionFlow } from "@type/index";
 
 interface CategoryBadgeProps {
   name: string;
   color?: string;
   flow?: TransactionFlow;
-  bucket?: BudgetBucket;
+  bucket?: BudgetType;
   size?: "sm" | "md";
 }
 
-const bucketLabel: Record<BudgetBucket, string> = {
-  need:          "Need",
-  want:          "Want",
-  savings:       "Savings",
-  uncategorised: "—",
+const bucketLabel: Record<BudgetType, string> = {
+  NEED:          "Need",
+  WANT:          "Want",
+  SAVINGS:       "Savings",
+  INCOME:        "Income",
 };
 
 export function CategoryBadge({
@@ -22,7 +22,7 @@ export function CategoryBadge({
   bucket,
   size = "md",
 }: CategoryBadgeProps) {
-  const dot = color ?? (flow === "inflow" ? "#10B981" : "#6366F1");
+  const dot = color ?? (flow === "INFLOW" ? "#10B981" : "#6366F1");
 
   return (
     <span
@@ -36,7 +36,7 @@ export function CategoryBadge({
         style={{ backgroundColor: dot }}
       />
       {name}
-      {bucket && bucket !== "uncategorised" && (
+      {bucket && (
         <span className="ml-0.5 text-slate-500">· {bucketLabel[bucket]}</span>
       )}
     </span>

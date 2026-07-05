@@ -1,125 +1,84 @@
-// ─── Transaction ────────────────────────────────────────────────────────────
+// =============================================================================
+// TYPES — Frontend-only UI state
+//
+// Domain types (Transaction, Account, Budget etc.) live in @api/index.ts
+// as part of the Api namespace — that is the single source of truth for
+// anything that touches the backend.
+//
+// This file re-exports Api domain types for convenience so components can
+// import from one place, and adds purely frontend UI state types that have
+// no backend equivalent.
+// =============================================================================
 
-export type TransactionFlow = "inflow" | "outflow";
+// ─── Re-export all backend domain types ───────────────────────────────────────
+// Components import from "@types/index" as before — no import-site changes needed.
 
-export type BudgetBucket = "need" | "want" | "savings" | "uncategorised";
+export type {
+  // Enums
+  TransactionFlow,
+  BudgetType,
+  AssetClass,
+  AccountCategory,
+  ImportReviewStatus,
+  ImportedFileStatus,
+} from "@api/index";
 
-export interface TransactionCategory {
-  id: string;
-  name: string;
-  parentId?: string; // supports two-level hierarchy
-  flow: TransactionFlow;
-  bucket: BudgetBucket;
-  color?: string;
-}
+// Re-export Api sub-namespace response shapes under flat names
+// so existing component code (TransactionTable, DetailDrawer etc.) compiles
+// without modification.
+import type { Api } from "@api/index";
 
-export interface Transaction {
-  id: string;
-  date: string; // ISO 8601
-  description: string;
-  amount: number; // always positive; flow determines direction
-  flow: TransactionFlow;
-  categoryId: string;
-  category?: TransactionCategory;
-  notes?: string;
-  source?: "manual" | "upload";
-  uploadBatchId?: string;
-}
+export type AuthUser            = Api.Auth.UserResponse;
+export type DataDictionaryItem  = Api.DataDictionary.Item;
+export type DataDictionaryGroup = Api.DataDictionary.Group;
+export type DataDictionaryGroupCode = Api.DataDictionary.GroupCode;
+export type AccountType         = Api.Accounts.AccountType;
+export type Account             = Api.Accounts.Account;
+export type CreateAccountRequest  = Api.Accounts.CreateRequest;
+export type UpdateAccountRequest  = Api.Accounts.UpdateRequest;
+export type NetWorth            = Api.Accounts.NetWorthResponse;
+export type Transaction         = Api.Transactions.Transaction;
+export type CreateTransactionRequest = Api.Transactions.CreateRequest;
+export type UpdateTransactionRequest = Api.Transactions.UpdateRequest;
+export type TransactionPeriodParams  = Api.Transactions.PeriodParams;
+export type MonthlySummary      = Api.Transactions.MonthlySummaryResponse;
+export type BudgetConfig        = Api.Budget.Config;
+export type BudgetSummary       = Api.Budget.SummaryResponse;
+export type UpsertBudgetRequest = Api.Budget.UpsertRequest;
+export type ImportedFile        = Api.Import.ImportedFile;
+export type ImportRow           = Api.Import.ImportRow;
+export type UpdateImportRowRequest = Api.Import.UpdateRowRequest;
+export type ExchangeRate        = Api.ExchangeRates.Rate;
+export type ApiError            = Api.ErrorResponse;
 
-// ─── Budget ─────────────────────────────────────────────────────────────────
+// Auth request shapes (used in LoginPage, AuthContext)
+export type LoginRequest    = Api.Auth.LoginRequest;
+export type RegisterRequest = Api.Auth.RegisterRequest;
 
-export interface BudgetTarget {
-  month: string; // "YYYY-MM"
-  needPercent: number;
-  wantPercent: number;
-  savingsPercent: number;
-}
+// =============================================================================
+// UI STATE — frontend-only, no backend equivalent
+// =============================================================================
 
-export interface BudgetActual {
-  month: string;
-  totalInflow: number;
-  totalOutflow: number;
-  needs: number;
-  wants: number;
-  savings: number;
-  spareCash: number; // totalInflow - (needs + wants + savings)
-}
-
-export interface BudgetForecast {
-  month: string;
-  projectedInflow: number;
-  projectedNeeds: number;
-  projectedWants: number;
-  projectedSavings: number;
-  projectedSpareCash: number;
-}
-
-// ─── Dashboard Summary ───────────────────────────────────────────────────────
-
-export interface MonthlySummary {
-  month: string;
-  totalInflow: number;
-  totalOutflow: number;
-  totalAssets: number;
-  budget: BudgetActual;
-  forecast: BudgetForecast;
-}
-
-// ─── File Upload ─────────────────────────────────────────────────────────────
-
-export type UploadStatus =
-  | "idle"
-  | "uploading"
-  | "processing"
-  | "success"
-  | "error";
-
-export interface UploadBatch {
-  id: string;
-  filename: string;
-  fileType: string;
-  uploadedAt: string;
-  status: UploadStatus;
-  transactionCount?: number;
-  errorMessage?: string;
-}
-
-// ─── API Response Wrappers ───────────────────────────────────────────────────
-
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  pageSize: number;
-}
-
-// ─── UI State ────────────────────────────────────────────────────────────────
-
-export interface DateRangeFilter {
-  from: string;
-  to: string;
-}
-
+/** Active filter state for the Transactions page */
 export interface TransactionFilters {
-  flow?: TransactionFlow;
-  categoryId?: string;
-  bucket?: BudgetBucket;
-  dateRange?: DateRangeFilter;
-  search?: string;
+  flow?:       TransactionFlow;
+  budgetType?: BudgetType;
+  accountId?:  number;
+  year?:       number;
+  month?:      number;
+  search?:     string;
 }
 
-export interface LoginRequest {
-  email: string;
-  password: string;
+/** Month picker helper used in Dashboard / Budget period selector */
+export interface DatePeriod {
+  year:  number;
+  month: number; // 1–12
 }
 
-export interface RegisterRequest {
-  email: string;
-  password: string;
-  fullName: string;
-}
+// ─── Re-export for convenience ─────────────────────────────────────────────────
+// Allows: import type { Api } from "@types/index" alongside the flat aliases above
+
+export type { Api } from "@api/index";
+
+// Resolve circular — TransactionFlow etc. need to be in scope for UI types above
+import type { TransactionFlow, BudgetType } from "@api/index";
