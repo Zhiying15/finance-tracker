@@ -2,7 +2,6 @@ package com.finance.user.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.finance.common.dto.ErrorResponse
-import com.finance.user.service.impl.UserDetailsServiceImpl
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.context.annotation.Bean
@@ -27,7 +26,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @EnableWebSecurity
 class SecurityConfig(
     private val objectMapper: ObjectMapper,
-    private val userDetailsService: UserDetailsServiceImpl,
 ) {
 
     @Bean
@@ -43,6 +41,7 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
                     // Data dictionary is public — no session needed to render dropdowns
                     .requestMatchers(HttpMethod.GET, "/data-dictionary", "/data-dictionary/**").permitAll()
+//                    .requestMatchers("/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
             }
             .sessionManagement { session ->
@@ -56,7 +55,6 @@ class SecurityConfig(
                 ex.authenticationEntryPoint(unauthorizedEntryPoint())
                 ex.accessDeniedHandler(accessDeniedHandler())
             }
-            .userDetailsService(userDetailsService)
 
         return http.build()
     }

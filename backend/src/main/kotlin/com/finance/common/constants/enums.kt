@@ -17,3 +17,5 @@ enum class ResponseCode { SUCCESS, FAILURE, UNAUTHENTICATED, EXPIRED }
 enum class BudgetType { NEED, WANT, SAVINGS, INVESTMENTS, INCOME, EXCLUDED }
 
 enum class ReviewStatus { NEW, POSSIBLE_DUPLICATE, APPROVED, REJECTED }
+
+enum class UserRole { USER, OWNER, ADMIN }

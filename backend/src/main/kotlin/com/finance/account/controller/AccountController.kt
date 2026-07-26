@@ -10,6 +10,8 @@ import com.finance.user.security.UserPrincipal
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/accounts")
+//@EnableMethodSecurity
 class AccountController(
     private val accountService: AccountService,
 ) {
@@ -30,6 +33,7 @@ class AccountController(
     // GET /api/accounts/types
     // Public reference data for account creation form dropdowns
     @GetMapping("/types")
+//    @PreAuthorize("hasRole('ADMIN')")
     fun listAccountTypes(): ResponseEntity<List<AccountTypeResponse>> =
         ResponseEntity.ok(accountService.listAccountTypes())
 

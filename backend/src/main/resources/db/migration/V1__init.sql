@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS users (
                        id            VARCHAR(36)  NOT NULL,
                        email         VARCHAR(255) NOT NULL,
                        password_hash VARCHAR(255) NOT NULL,
-                       full_name     VARCHAR(100),
+                       full_name     VARCHAR(100) NOT NULL,
+                       role          VARCHAR(100)  NOT NULL,
                        created_at    DATETIME(6)  NOT NULL,
                        updated_at    DATETIME(6)  NOT NULL,
 

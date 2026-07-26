@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="refactoring package path">
+    <list default="true" id="075462e3-e70a-48af-8312-48a1e6312268" name="Changes" comment="updating session handling for test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/DataDictionaryConstants.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/enums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/constants/enums.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/entity/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/config/SecurityConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/security/UserPrincipal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/security/UserPrincipal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/AuthServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/AuthServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/UserDetailsServiceImpl.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="75" />
+    <option name="cachedIndexableFilesCount" value="103" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -61,8 +66,8 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="Kotlin Interface" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Data Class" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -130,6 +135,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/src/main/resources/db/migration" />
       <recent name="$PROJECT_DIR$/database" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src/main/resources/backup" />
     </key>
     <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
       <recent name="com.finance" />
@@ -308,7 +316,31 @@
       <option name="project" value="LOCAL" />
       <updated>1783176014984</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="remove unnecessary file">
+      <option name="closed" value="true" />
+      <created>1783177755789</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1783177755789</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Updating AccountRepository.kt">
+      <option name="closed" value="true" />
+      <created>1785074237619</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1785074237619</updated>
+    </task>
+    <task id="LOCAL-00020" summary="updating session handling for test">
+      <option name="closed" value="true" />
+      <created>1785077342655</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1785077342655</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,7 +373,10 @@
     <MESSAGE value="cleaning up code in progress..." />
     <MESSAGE value="refactoring code into domain specific folder" />
     <MESSAGE value="refactoring package path" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring package path" />
+    <MESSAGE value="remove unnecessary file" />
+    <MESSAGE value="Updating AccountRepository.kt" />
+    <MESSAGE value="updating session handling for test" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating session handling for test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -354,15 +389,15 @@
         <line-breakpoint enabled="true" type="kotlin-function">
           <url>file://$PROJECT_DIR$/backend/src/main/kotlin/com/finance/importing/repository/ImportedTransactionRepository.kt</url>
           <line>14</line>
-          <properties class="com.finance.importing.repository.ImportedTransactionRepository">
+          <properties class="com.finance.importing.repository.ImportedTransactionRepository" method="findAllByFileIdOrderByCreatedAtAsc">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/backend/src/main/kotlin/com/finance/common/config/AsyncConfig.kt</url>
-          <line>20</line>
+          <url>file://$PROJECT_DIR$/backend/src/main/kotlin/com/finance/user/service/impl/AuthServiceImpl.kt</url>
+          <line>64</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

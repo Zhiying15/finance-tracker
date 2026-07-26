@@ -1,13 +1,12 @@
 package com.finance.user.service.impl
 
-import com.finance.common.constants.SessionConstant
+import com.finance.common.constants.UserRole
 import com.finance.common.exception.AppException
 import com.finance.entity.User
 import com.finance.user.dto.request.SignInRequest
 import com.finance.user.dto.request.UserRequest
 import com.finance.user.security.UserPrincipal
 import com.finance.user.service.AuthService
-
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpSession
 import org.slf4j.LoggerFactory
@@ -41,6 +40,7 @@ class AuthServiceImpl(
             email = request.email.lowercase().trim(),
             passwordHash = passwordEncoder.encode(request.password),
             fullName = request.fullName?.trim(),
+            role = UserRole.USER
         )
 
         val saved = userRepository.save(user)
@@ -61,31 +61,35 @@ class AuthServiceImpl(
             throw AppException.Unauthorized("Invalid email or password")
         }
 
-        // Invalidate any existing session before creating a new one (session fixation defence)
+        // 1. Invalidate any existing session (Session fixation defense)
         httpRequest.getSession(false)?.invalidate()
-        val session: HttpSession = httpRequest.getSession(true)
 
+        // This implicitly builds the underlying Redis session structure
+        httpRequest.getSession(true)
+
+        // 2. Initialize your clean UserPrincipal (Implementing UserDetails)
         val principal = UserPrincipal(
             userId = user.id,
             email = user.email,
             fullName = user.fullName,
+            role = user.role ?: UserRole.USER // 3. Pull your dynamic DB role field here
         )
-        session.setAttribute(SessionConstant.USER_PRINCIPAL_KEY, principal)
-        // 2. CRUCIAL BRIDGE: Create an authenticated Spring Security token
-        // Use user.authorities or emptyList() depending on whether your UserPrincipal implements UserDetails
-        val authorities = emptyList<org.springframework.security.core.GrantedAuthority>()
-        val authentication = UsernamePasswordAuthenticationToken(principal, null, authorities)
 
-        // 3. Construct an explicit empty security context and populate it
+        // 3. Connect to Spring Security Token using the principal's dynamic authorities
+        val authentication = UsernamePasswordAuthenticationToken(
+            principal,
+            null,
+            principal.authorities // Uses the UserDetails contract methods naturally
+        )
+
+        // 4. Construct context and bind it to the local working thread
         val context = SecurityContextHolder.createEmptyContext().apply {
             this.authentication = authentication
         }
         SecurityContextHolder.setContext(context)
 
-        // 4. Force save the context back into the HTTP Session context repository
-        // This pushes the required "SPRING_SECURITY_CONTEXT" structural key to Redis
+        // 5. Commit the transaction directly to your Redis server instance
         securityContextRepository.saveContext(context, httpRequest, null)
-
 
         return UserResponse(
             userId = user.id,

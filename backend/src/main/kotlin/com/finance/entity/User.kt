@@ -1,5 +1,6 @@
 package com.finance.entity
 
+import com.finance.common.constants.UserRole
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -22,5 +23,8 @@ class User(
 
     @Column(name = "full_name", length = 100)
     val fullName: String? = null,
+
+    @Column(name = "role", length = 100)
+    val role: UserRole,
 
 ) : BaseEntity()
