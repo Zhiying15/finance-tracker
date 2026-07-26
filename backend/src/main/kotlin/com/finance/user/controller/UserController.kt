@@ -1,8 +1,6 @@
 package com.finance.user.controller
 
 import com.finance.common.constants.APIConstant
-import com.finance.common.constants.SessionConstant
-import com.finance.common.exception.AppException
 import com.finance.user.dto.request.SignInRequest
 import com.finance.user.dto.request.UserRequest
 import com.finance.user.dto.response.UserResponse
@@ -13,6 +11,7 @@ import jakarta.servlet.http.HttpSession
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -44,17 +43,13 @@ class UserController(
     }
 
     @PostMapping(APIConstant.LOGOUT)
-    fun logout(session: HttpSession?): ResponseEntity<Unit> {
+    fun logout(session: HttpSession): ResponseEntity<Unit> {
         authService.logout(session)
         return ResponseEntity.noContent().build()
     }
 
     @GetMapping("/me")
-    fun getCurrentUser(session: HttpSession?): ResponseEntity<UserResponse> {
-        val principal = session
-            ?.getAttribute(SessionConstant.USER_PRINCIPAL_KEY) as? UserPrincipal
-            ?: throw AppException.Unauthorized("No active session")
-
+    fun getCurrentUser(@AuthenticationPrincipal principal: UserPrincipal): ResponseEntity<UserResponse> {
         return ResponseEntity.ok(authService.getCurrentUser(principal))
     }
 }

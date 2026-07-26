@@ -6,11 +6,11 @@ import com.finance.account.dto.response.AccountResponse
 import com.finance.account.dto.response.AccountTypeResponse
 import com.finance.account.dto.response.NetWorthResponse
 import com.finance.account.service.AccountService
-import com.finance.common.utility.SecurityUtils
-import jakarta.servlet.http.HttpSession
+import com.finance.user.security.UserPrincipal
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -37,38 +37,34 @@ class AccountController(
     // Returns active accounts by default; pass ?includeInactive=true for all
     @GetMapping
     fun listAccounts(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestParam(defaultValue = "false") includeInactive: Boolean,
     ): ResponseEntity<List<AccountResponse>> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(accountService.listAccounts(user.userId, includeInactive))
     }
 
     // GET /api/accounts/net-worth
     // Summary of assets, liabilities, net worth + breakdown by asset class
     @GetMapping("/net-worth")
-    fun getNetWorth(session: HttpSession?): ResponseEntity<NetWorthResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
+    fun getNetWorth(@AuthenticationPrincipal user: UserPrincipal): ResponseEntity<NetWorthResponse> {
         return ResponseEntity.ok(accountService.getNetWorth(user.userId))
     }
 
     // GET /api/accounts/{accountId}
     @GetMapping("/{accountId}")
     fun getAccount(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable accountId: String,
     ): ResponseEntity<AccountResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(accountService.getAccount(user.userId, accountId))
     }
 
     // POST /api/accounts
     @PostMapping
     fun createAccount(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @Valid @RequestBody request: AccountRequest,
     ): ResponseEntity<AccountResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(accountService.createAccount(user.userId, request))
@@ -77,11 +73,10 @@ class AccountController(
     // PATCH /api/accounts/{accountId}
     @PatchMapping("/{accountId}")
     fun updateAccount(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable accountId: String,
         @Valid @RequestBody request: AccountUpdateRequest,
     ): ResponseEntity<AccountResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(accountService.updateAccount(user.userId, accountId, request))
     }
 
@@ -89,10 +84,9 @@ class AccountController(
     // Soft delete — sets is_active = false, preserves transaction history
     @DeleteMapping("/{accountId}")
     fun deactivateAccount(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable accountId: String,
     ): ResponseEntity<Unit> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         accountService.deactivateAccount(user.userId, accountId)
         return ResponseEntity.noContent().build()
     }
@@ -100,10 +94,9 @@ class AccountController(
     // PATCH /api/accounts/{accountId}/reactivate
     @PatchMapping("/{accountId}/reactivate")
     fun reactivateAccount(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable accountId: String,
     ): ResponseEntity<AccountResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(accountService.reactivateAccount(user.userId, accountId))
     }
 }

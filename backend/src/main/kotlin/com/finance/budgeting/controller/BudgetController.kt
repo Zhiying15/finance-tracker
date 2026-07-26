@@ -4,10 +4,10 @@ import com.finance.budgeting.dto.request.BudgetUpsertRequest
 import com.finance.budgeting.dto.response.BudgetHistoryResponse
 import com.finance.budgeting.dto.response.BudgetResponse
 import com.finance.budgeting.service.BudgetService
-import com.finance.common.utility.SecurityUtils
-import jakarta.servlet.http.HttpSession
+import com.finance.user.security.UserPrincipal
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -27,11 +27,10 @@ class BudgetController(
     // If no budget configured → returns defaults (50/30/20) + live actuals
     @GetMapping
     fun getBudget(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestParam year: Int,
         @RequestParam month: Int,
     ): ResponseEntity<BudgetResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(budgetService.getBudget(user.userId, year, month))
     }
 
@@ -39,9 +38,8 @@ class BudgetController(
     // All months where budget has been explicitly configured — for history list
     @GetMapping("/history")
     fun getBudgetHistory(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
     ): ResponseEntity<List<BudgetHistoryResponse>> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(budgetService.getBudgetHistory(user.userId))
     }
 
@@ -50,10 +48,9 @@ class BudgetController(
     // Returns full budget response with live summary immediately
     @PutMapping
     fun upsertBudget(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @Valid @RequestBody request: BudgetUpsertRequest,
     ): ResponseEntity<BudgetResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(budgetService.upsertBudget(user.userId, request))
     }
 
@@ -61,11 +58,10 @@ class BudgetController(
     // Removes explicit budget config — GET will fall back to defaults
     @DeleteMapping
     fun deleteBudget(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestParam year: Int,
         @RequestParam month: Int,
     ): ResponseEntity<Unit> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         budgetService.deleteBudget(user.userId, year, month)
         return ResponseEntity.noContent().build()
     }

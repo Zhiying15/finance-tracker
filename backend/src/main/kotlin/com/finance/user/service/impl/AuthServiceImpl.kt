@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import com.finance.user.dto.response.UserResponse
 import com.finance.user.repository.UserRepository
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository
 
 @Service
 class AuthServiceImpl(
@@ -24,6 +27,9 @@ class AuthServiceImpl(
 ) : AuthService {
 
     private val log = LoggerFactory.getLogger(javaClass)
+    // Create an instance of the security repository
+    private val securityContextRepository = HttpSessionSecurityContextRepository()
+
 
     @Transactional
     override fun register(request: UserRequest): UserResponse {
@@ -65,6 +71,21 @@ class AuthServiceImpl(
             fullName = user.fullName,
         )
         session.setAttribute(SessionConstant.USER_PRINCIPAL_KEY, principal)
+        // 2. CRUCIAL BRIDGE: Create an authenticated Spring Security token
+        // Use user.authorities or emptyList() depending on whether your UserPrincipal implements UserDetails
+        val authorities = emptyList<org.springframework.security.core.GrantedAuthority>()
+        val authentication = UsernamePasswordAuthenticationToken(principal, null, authorities)
+
+        // 3. Construct an explicit empty security context and populate it
+        val context = SecurityContextHolder.createEmptyContext().apply {
+            this.authentication = authentication
+        }
+        SecurityContextHolder.setContext(context)
+
+        // 4. Force save the context back into the HTTP Session context repository
+        // This pushes the required "SPRING_SECURITY_CONTEXT" structural key to Redis
+        securityContextRepository.saveContext(context, httpRequest, null)
+
 
         return UserResponse(
             userId = user.id,
@@ -73,8 +94,8 @@ class AuthServiceImpl(
         )
     }
 
-    override fun logout(session: HttpSession?) {
-        session?.invalidate()
+    override fun logout(session: HttpSession) {
+        session.invalidate()
     }
 
     @Transactional(readOnly = true)

@@ -10,6 +10,6 @@ import com.finance.user.dto.response.UserResponse
 interface AuthService {
     fun register(request: UserRequest): UserResponse
     fun login(request: SignInRequest, httpRequest: HttpServletRequest): UserResponse
-    fun logout(session: HttpSession?)
+    fun logout(session: HttpSession)
     fun getCurrentUser(principal: UserPrincipal): UserResponse
 }

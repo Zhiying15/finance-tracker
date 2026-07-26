@@ -1,15 +1,15 @@
 package com.finance.importing.controller
 
-import com.finance.common.utility.SecurityUtils
 import com.finance.importing.dto.BulkActionResult
 import com.finance.importing.dto.request.ImportTransactionUpdateRequest
 import com.finance.importing.dto.response.ImportFileResponse
 import com.finance.importing.dto.response.ImportTransactionReviewResponse
 import com.finance.importing.service.ImportService
-import jakarta.servlet.http.HttpSession
+import com.finance.user.security.UserPrincipal
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -30,11 +30,10 @@ class ImportController(
     // Accepts multipart CSV — returns immediately with fileId (async parse kicks off)
     @PostMapping("/upload")
     fun uploadFile(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestParam("file") file: MultipartFile,
         @RequestParam("accountId") accountId: String,
     ): ResponseEntity<ImportFileResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         val response = importService.uploadFile(user.userId, file, accountId)
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response)
     }
@@ -43,9 +42,8 @@ class ImportController(
     // List all uploaded files for the user — with row counts and status
     @GetMapping("/files")
     fun listFiles(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
     ): ResponseEntity<List<ImportFileResponse>> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(importService.listFiles(user.userId))
     }
 
@@ -53,10 +51,9 @@ class ImportController(
     // Poll this endpoint to check parse status (PROCESSING → PENDING_REVIEW)
     @GetMapping("/files/{fileId}")
     fun getFile(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable fileId: String,
     ): ResponseEntity<ImportFileResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(importService.getFile(user.userId, fileId))
     }
 
@@ -64,10 +61,9 @@ class ImportController(
     // All parsed rows for review — includes parse errors, duplicates, clean rows
     @GetMapping("/files/{fileId}/rows")
     fun getReviewItems(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable fileId: String,
     ): ResponseEntity<List<ImportTransactionReviewResponse>> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(importService.getReviewItems(user.userId, fileId))
     }
 
@@ -75,12 +71,11 @@ class ImportController(
     // Edit a parsed row before approving — fixes parse errors or corrections
     @PutMapping("/files/{fileId}/rows/{importTxId}")
     fun updateRow(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable fileId: String,
         @PathVariable importTxId: String,
         @Valid @RequestBody request: ImportTransactionUpdateRequest,
     ): ResponseEntity<ImportTransactionReviewResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             importService.updateReviewRow(user.userId, fileId, importTxId, request)
         )
@@ -90,12 +85,11 @@ class ImportController(
     // Approve single row — promotes to transactions, updates account balance
     @PostMapping("/files/{fileId}/rows/{importTxId}/approve")
     fun approveRow(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable fileId: String,
         @PathVariable importTxId: String,
         @RequestParam("accountId") accountId: String,
     ): ResponseEntity<ImportTransactionReviewResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.status(HttpStatus.CREATED).body(
             importService.approveRow(user.userId, fileId, importTxId, accountId)
         )
@@ -105,11 +99,10 @@ class ImportController(
     // Reject single row — will not be added to ledger
     @PostMapping("/files/{fileId}/rows/{importTxId}/reject")
     fun rejectRow(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable fileId: String,
         @PathVariable importTxId: String,
     ): ResponseEntity<ImportTransactionReviewResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             importService.rejectRow(user.userId, fileId, importTxId)
         )
@@ -119,11 +112,10 @@ class ImportController(
     // Bulk approve all NEW rows — skips POSSIBLE_DUPLICATE (requires individual review)
     @PostMapping("/files/{fileId}/bulk-approve")
     fun bulkApproveNew(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable fileId: String,
         @RequestParam("accountId") accountId: String,
     ): ResponseEntity<BulkActionResult> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             importService.bulkApproveNew(user.userId, fileId, accountId)
         )
@@ -133,10 +125,9 @@ class ImportController(
     // Bulk reject all NEW rows
     @PostMapping("/files/{fileId}/bulk-reject")
     fun bulkRejectNew(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable fileId: String,
     ): ResponseEntity<BulkActionResult> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             importService.bulkRejectNew(user.userId, fileId)
         )

@@ -1,10 +1,10 @@
 package com.finance.exchangerate.controller
 
-import com.finance.common.utility.SecurityUtils
 import com.finance.exchangerate.dto.response.ExchangeRateResponse
 import com.finance.exchangerate.service.impl.ExchangeRateServiceImpl
-import jakarta.servlet.http.HttpSession
+import com.finance.user.security.UserPrincipal
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 
@@ -17,9 +17,8 @@ class ExchangeRateController(
     // Latest rates for all currencies relative to base (SGD)
     @GetMapping
     fun getLatestRates(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
     ): ResponseEntity<List<ExchangeRateResponse>> {
-        SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(exchangeRateService.getLatestRates())
     }
 
@@ -28,10 +27,9 @@ class ExchangeRateController(
     // e.g. GET /api/exchange-rates/USD → SGD to USD rate
     @GetMapping("/{targetCurrency}")
     fun getRate(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable targetCurrency: String,
     ): ResponseEntity<ExchangeRateResponse> {
-        SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             exchangeRateService.getRate(targetCurrency.uppercase())
         )
@@ -41,9 +39,8 @@ class ExchangeRateController(
     // Manual trigger — useful for dev/testing without waiting for midnight
     @PostMapping("/refresh")
     fun refreshRates(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
     ): ResponseEntity<Map<String, String>> {
-        SecurityUtils.resolveCurrentUser(session)
         exchangeRateService.fetchAndStoreRates()
         return ResponseEntity.ok(mapOf("message" to "Exchange rates refreshed successfully"))
     }

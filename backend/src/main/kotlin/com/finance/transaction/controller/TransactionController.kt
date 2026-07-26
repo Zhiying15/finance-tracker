@@ -1,15 +1,15 @@
 package com.finance.transaction.controller
 
-import com.finance.common.utility.SecurityUtils
 import com.finance.transaction.dto.request.TransactionRequest
 import com.finance.transaction.dto.request.TransactionUpdateRequest
 import com.finance.transaction.dto.response.TransactionResponse
 import com.finance.transaction.dto.response.TransactionSummaryResponse
 import com.finance.transaction.service.TransactionService
-import jakarta.servlet.http.HttpSession
+import com.finance.user.security.UserPrincipal
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -30,9 +30,8 @@ class TransactionController(
     // All transactions for the current user, newest first
     @GetMapping
     fun listTransactions(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
     ): ResponseEntity<List<TransactionResponse>> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(transactionService.listTransactions(user.userId))
     }
 
@@ -40,11 +39,10 @@ class TransactionController(
     // Transactions filtered by month — used by monthly summary screen
     @GetMapping("/by-period")
     fun listTransactionsByPeriod(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestParam year: Int,
         @RequestParam month: Int,
     ): ResponseEntity<List<TransactionResponse>> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             transactionService.listTransactionsByPeriod(user.userId, year, month)
         )
@@ -54,10 +52,9 @@ class TransactionController(
     // All transactions that involve a specific account (from or to)
     @GetMapping("/by-account/{accountId}")
     fun listTransactionsByAccount(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable accountId: String,
     ): ResponseEntity<List<TransactionResponse>> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             transactionService.listTransactionsByAccount(user.userId, accountId)
         )
@@ -67,11 +64,10 @@ class TransactionController(
     // Monthly budget summary — income, spend by bucket, spare cash, net worth
     @GetMapping("/summary")
     fun getMonthlySummary(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestParam year: Int,
         @RequestParam month: Int,
     ): ResponseEntity<TransactionSummaryResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             transactionService.getMonthlySummary(user.userId, year, month)
         )
@@ -80,10 +76,9 @@ class TransactionController(
     // GET /api/transactions/{transactionId}
     @GetMapping("/{transactionId}")
     fun getTransaction(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable transactionId: String,
     ): ResponseEntity<TransactionResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(transactionService.getTransaction(user.userId, transactionId))
     }
 
@@ -91,10 +86,9 @@ class TransactionController(
     // Manual transaction entry — immediately approved, balance updated instantly
     @PostMapping
     fun createTransaction(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @Valid @RequestBody request: TransactionRequest,
     ): ResponseEntity<TransactionResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(transactionService.createManualTransaction(user.userId, request))
@@ -104,11 +98,10 @@ class TransactionController(
     // Update description, remarks, budgetType, date — amount and accounts are immutable
     @PatchMapping("/{transactionId}")
     fun updateTransaction(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable transactionId: String,
         @Valid @RequestBody request: TransactionUpdateRequest,
     ): ResponseEntity<TransactionResponse> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         return ResponseEntity.ok(
             transactionService.updateTransaction(user.userId, transactionId, request)
         )
@@ -118,10 +111,9 @@ class TransactionController(
     // Hard delete — reverses account balance change
     @DeleteMapping("/{transactionId}")
     fun deleteTransaction(
-        session: HttpSession?,
+        @AuthenticationPrincipal user: UserPrincipal,
         @PathVariable transactionId: String,
     ): ResponseEntity<Unit> {
-        val user = SecurityUtils.resolveCurrentUser(session)
         transactionService.deleteTransaction(user.userId, transactionId)
         return ResponseEntity.noContent().build()
     }
