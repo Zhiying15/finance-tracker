@@ -1,5 +1,6 @@
 package com.finance.account.repository
 
+import com.finance.common.constants.AccountCategory
 import com.finance.entity.Account
 import com.finance.entity.Currency
 import org.springframework.data.jpa.repository.JpaRepository
@@ -27,14 +28,17 @@ interface AccountRepository : JpaRepository<Account, String> {
 
     // Net worth calculation — assets only
     @Query("""
-        SELECT COALESCE(SUM(a.currentBalance), 0)
-        FROM Account a
-        WHERE a.user.id = :userId
-          AND a.includeInNetWorth = true
-          AND a.accountType.category = com.finance.entity.AccountCategory.ASSET
-          AND a.isActive = true
-    """)
-    fun sumAssetBalance(@Param("userId") userId: String): BigDecimal
+    SELECT COALESCE(SUM(a.currentBalance), 0)
+    FROM Account a
+    WHERE a.user.id = :userId
+      AND a.includeInNetWorth = true
+      AND a.accountType.category = :category
+      AND a.isActive = true
+""")
+    fun sumAssetBalance(
+        @Param("userId") userId: String,
+        @Param("category") category: AccountCategory = AccountCategory.ASSET
+    ): BigDecimal
 
     // Net worth calculation — liabilities only
     @Query("""
@@ -42,10 +46,13 @@ interface AccountRepository : JpaRepository<Account, String> {
         FROM Account a
         WHERE a.user.id = :userId
           AND a.includeInNetWorth = true
-          AND a.accountType.category = com.finance.entity.AccountCategory.LIABILITY
+          AND a.accountType.category = :category
           AND a.isActive = true
     """)
-    fun sumLiabilityBalance(@Param("userId") userId: String): BigDecimal
+    fun sumLiabilityBalance
+                (@Param("userId") userId: String,
+                 @Param("category") category: AccountCategory = AccountCategory.LIABILITY
+    ): BigDecimal
 
     // Existence check — prevents duplicate account names per user
     fun existsByUserIdAndNameIgnoreCaseAndIsActiveTrue(
