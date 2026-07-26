@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { FileUploadZone } from "@components/ui/FileUploadZone";
 import { MOCK_UPLOADS } from "@lib/mock-data";
 import type { Api, ImportedFileStatus } from "@api/index";
+type ImportedFile       = Api.Import.ImportedFile;
 
-type ImportedFile      = Api.Import.ImportedFile;
 
 const STATUS_STYLE: Record<ImportedFileStatus, { label: string; cls: string }> = {
   UPLOADED:       { label: "Uploaded",       cls: "bg-indigo-500/10  text-indigo-400"  },
@@ -128,13 +129,12 @@ export function UploadPage() {
                       {statusMeta.label}
                     </span>
                     {batch.status === "PENDING_REVIEW" && (
-                      <button
-                        type="button"
+                      <Link
+                        to={`/upload/${batch.id}/review`}
                         className="rounded-lg bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-400 transition hover:bg-indigo-500/20"
-                        // TODO: navigate(`/upload/${batch.id}/review`)
                       >
                         Review →
-                      </button>
+                      </Link>
                     )}
                   </div>
 

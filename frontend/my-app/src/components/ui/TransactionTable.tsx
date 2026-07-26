@@ -5,7 +5,7 @@ import { Pagination } from "./Pagination";
 import { EmptyState } from "./EmptyState";
 import { TransactionDetailDrawer } from "./TransactionDetailDrawer";
 import { formatCurrency, formatDate } from "@lib/mock-data";
-import type { Transaction } from "@type/index";
+import type { Transaction, TransactionFlow } from "@type/index";
 import { Link } from "react-router";
 
 interface TransactionTableProps {
@@ -37,7 +37,7 @@ export function TransactionTable({
     return [...transactions].sort((a, b) => {
       let cmp = 0;
       if (sortField === "date") {
-        cmp = a.date.localeCompare(b.date);
+        cmp = a.createdAt.localeCompare(b.createdAt);
       } else if (sortField === "amount") {
         cmp = a.amount - b.amount;
       } else if (sortField === "description") {
@@ -143,7 +143,7 @@ export function TransactionTable({
                 >
                   {show("date") && (
                     <td className="whitespace-nowrap px-6 py-4 font-mono text-xs text-slate-400">
-                      {formatDate(txn.date)}
+                      {formatDate(txn.createdAt)}
                     </td>
                   )}
 
@@ -173,10 +173,10 @@ export function TransactionTable({
                     <td className="whitespace-nowrap px-6 py-4 text-right">
                       <span
                         className={`font-semibold tabular-nums ${
-                          txn.flow === "inflow" ? "text-emerald-400" : "text-rose-400"
+                          txn.transactionFlow === "inflow" ? "text-emerald-400" : "text-rose-400"
                         }`}
                       >
-                        {txn.flow === "inflow" ? "+" : "−"}
+                        {txn.transactionFlow === "inflow" ? "+" : "−"}
                         {formatCurrency(txn.amount)}
                       </span>
                     </td>

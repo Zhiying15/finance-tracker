@@ -1,7 +1,7 @@
 import { Drawer } from "./Drawer";
 import { CategoryBadge } from "./CategoryBadge";
 import { formatCurrency, formatDate } from "@lib/mock-data";
-import type { Transaction } from "@type/index";
+import type { Transaction, TransactionFlow } from "@type/index";
 
 interface TransactionDetailDrawerProps {
   transaction: Transaction | null;
@@ -36,24 +36,24 @@ export function TransactionDetailDrawer({ transaction: txn, onClose }: Transacti
         <div className="space-y-6">
           {/* Hero amount */}
           <div className={`rounded-2xl p-6 text-center ${
-            txn.flow === "inflow"
+            txn.transactionFlow === "inflow"
               ? "bg-emerald-500/10 border border-emerald-500/20"
               : "bg-rose-500/10 border border-rose-500/20"
           }`}>
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">
-              {txn.flow === "inflow" ? "Inflow" : "Outflow"}
+              {txn.transactionFlow === "inflow" ? "Inflow" : "Outflow"}
             </p>
             <p className={`text-4xl font-bold tabular-nums ${
-              txn.flow === "inflow" ? "text-emerald-400" : "text-rose-400"
+              txn.transactionFlow === "inflow" ? "text-emerald-400" : "text-rose-400"
             }`}>
-              {txn.flow === "inflow" ? "+" : "−"}{formatCurrency(txn.amount)}
+              {txn.transactionFlow === "inflow" ? "+" : "−"}{formatCurrency(txn.amount)}
             </p>
             <p className="mt-2 text-sm text-slate-400">{txn.description}</p>
           </div>
 
           {/* Detail rows */}
           <div className="rounded-2xl border border-white/5 bg-slate-900/60 px-5 divide-y divide-white/[0.04]">
-            <DetailRow label="Date" value={formatDate(txn.date)} />
+            <DetailRow label="Date" value={formatDate(txn.createdAt)} />
             <DetailRow
               label="Category"
               value={
@@ -61,7 +61,7 @@ export function TransactionDetailDrawer({ transaction: txn, onClose }: Transacti
                   <CategoryBadge
                     name={txn.category.name}
                     color={txn.category.color}
-                    flow={txn.flow}
+                    flow={txn.transactionFlow}
                     bucket={txn.category.bucket}
                     size="sm"
                   />
